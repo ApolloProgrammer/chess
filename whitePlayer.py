@@ -51,22 +51,52 @@ class W1dame(b.Board):
                 if b.Board.giveStatusofField(self,destination_x_WD,destination_y_WD)[0]!='W':
                     print('Current position is: '+self.position_x_WD+' '+str(self.position_y_WD))
 
+                    # logic
+                    x_pos = b.Board.translateLettertoNumber(self, self.position_x_WD)
+                    x_des = b.Board.translateLettertoNumber(self, destination_x_WD)
+                    y_pos = self.position_y_WD
+                    y_des = destination_y_WD
+                    controll_Diagonal = b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[0]  # checks whether move is allowed or not (either True or False)
+                    controll_Cross = b.Board.givepotentialTurmDestination(self, x_pos, y_pos, x_des, y_des)[0]  # checks whether move is allowed or not (either True or False)
 
-                    #logic
-                    x_pos=b.Board.translateLettertoNumber(self,self.position_x_WD)
-                    x_des=b.Board.translateLettertoNumber(self,destination_x_WD)
-
-                    if ( abs(x_pos-x_des) <2 and abs(self.position_y_WD-destination_y_WD) < 2 ):
-                        b.Board.changeAfield(self,self.position_x_WD,self.position_y_WD,'.......')
+                    if controll_Diagonal == True or controll_Cross == True:
+                        b.Board.changeAfield(self, self.position_x_WD, self.position_y_WD, '.......')
                         self.position_x_WD = destination_x_WD
                         self.position_y_WD = destination_y_WD
-                        print('New position is: '+self.position_x_WD+' '+str(self.position_y_WD))
-                        b.Board.changeAfield(self,self.position_x_WD,self.position_y_WD,self.name_WD)
+                        print('New position is: ' + self.position_x_WD + ' ' + str(self.position_y_WD))
+                        b.Board.changeAfield(self, self.position_x_WD, self.position_y_WD, self.name_WD)
                         return self.board
                         break
 
                     else:
                         print('Your move is invalid, please choose cooridnates again!')
+                        print('These are your options:')
+                        if controll_Cross == False and controll_Diagonal == False:
+                            print('Diagonal options:')
+
+                            print('Diagonal1')
+                            for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[1]:
+                                print(element)
+                            print('Diagonal2')
+                            for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
+                                print(element)
+
+                            print('Cross options')
+                            potentialFields = b.Board.givepotentialTurmDestination(self, x_pos, y_pos, x_des, y_des)[1]
+                            for element in potentialFields:
+                                print(element)
+                        elif controll_Diagonal==False or controll_Cross==False:
+                            if controll_Cross == False:
+                                potentialFields = b.Board.givepotentialTurmDestination(self, x_pos, y_pos, x_des, y_des)[1]
+                                for element in potentialFields:
+                                    print(element)
+                            else:
+                                print('Diagonal1')
+                                for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[1]:
+                                    print(element)
+                                print('Diagonal2')
+                                for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
+                                    print(element)
                         continue
                 else:
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WD,destination_y_WD))+'.')
@@ -86,22 +116,31 @@ class W1laeufer(b.Board):
                 if b.Board.giveStatusofField(self,destination_x_WL1,destination_y_WL1)[0]!='W':
                     print('Current position is: '+self.position_x_WL1+' '+str(self.position_y_WL1))
 
+                    # logic
+                    x_pos = b.Board.translateLettertoNumber(self, self.position_x_WL1)
+                    x_des = b.Board.translateLettertoNumber(self, destination_x_WL1)
+                    y_pos = self.position_y_WL1
+                    y_des = destination_y_WL1
+                    controll = b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[0]  # checks whether move is allowed or not (either True or False)
 
-                    #logic
-                    x_pos=b.Board.translateLettertoNumber(self,self.position_x_WL1)
-                    x_des=b.Board.translateLettertoNumber(self,destination_x_WL1)
-
-                    if ( abs(x_pos-x_des) <2 and abs(self.position_y_WL1-destination_y_WL1) < 2 ):
-                        b.Board.changeAfield(self,self.position_x_WL1,self.position_y_WL1,'.......')
+                    if controll == True:
+                        b.Board.changeAfield(self, self.position_x_WL1, self.position_y_WL1, '.......')
                         self.position_x_WL1 = destination_x_WL1
                         self.position_y_WL1 = destination_y_WL1
-                        print('New position is: '+self.position_x_WL1+' '+str(self.position_y_WL1))
-                        b.Board.changeAfield(self,self.position_x_WL1,self.position_y_WL1,self.name_WL1)
+                        print('New position is: ' + self.position_x_WL1 + ' ' + str(self.position_y_WL1))
+                        b.Board.changeAfield(self, self.position_x_WL1, self.position_y_WL1, self.name_WL1)
                         return self.board
                         break
 
                     else:
                         print('Your move is invalid, please choose cooridnates again!')
+                        print('These are your options:')
+                        print('Diagonal1')
+                        for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[1]:
+                            print(element)
+                        print('Diagonal2')
+                        for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
+                            print(element)
                         continue
                 else:
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WL1,destination_y_WL1))+'.')
@@ -111,7 +150,7 @@ class W2laeufer(b.Board):
         b.Board.__init__(self)
         self.position_x_WL2 = 'A'
         self.position_y_WL2 = 6
-        self.name_WK2 = 'W2laeufer'
+        self.name_WL2 = 'W2laeufer'
 
     def move(self):
         while True:
@@ -125,8 +164,11 @@ class W2laeufer(b.Board):
                 # logic
                 x_pos = b.Board.translateLettertoNumber(self, self.position_x_WL2)
                 x_des = b.Board.translateLettertoNumber(self, destination_x_WL2)
+                y_pos = self.position_y_WL2
+                y_des = destination_y_WL2
+                controll = b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[0]  # checks whether move is allowed or not (either True or False)
 
-                if (abs(x_pos - x_des) < 2 and abs(self.position_y_WL2 - destination_y_WL2) < 2):
+                if controll == True:
                     b.Board.changeAfield(self, self.position_x_WL2, self.position_y_WL2, '.......')
                     self.position_x_WL2 = destination_x_WL2
                     self.position_y_WL2 = destination_y_WL2
@@ -137,6 +179,13 @@ class W2laeufer(b.Board):
 
                 else:
                     print('Your move is invalid, please choose cooridnates again!')
+                    print('These are your options:')
+                    print('Diagonal1')
+                    for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[1]:
+                        print(element)
+                    print('Diagonal2')
+                    for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
+                        print(element)
                     continue
             else:
                 print('Does not work! This field is already governed by your ' + (
