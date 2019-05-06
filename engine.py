@@ -51,7 +51,7 @@ class Engine(white.W1koenig):
         counter = 0
         while True:
             if counter%2==0:
-                print("Its the turn of Player 1! (white)")
+                print("Its the turn of Player 1! (White)")
                 print('Please write what figure you choose to move: W1koenig, etc...')
                 choice=input()
                 if  choice == 'W1koenig':
@@ -123,7 +123,7 @@ class Engine(white.W1koenig):
                     print ('please choose again')
             #turn of Player2(black)
             else:
-                print("Its the turn of Player 2! (black)")
+                print("Its the turn of Player 2! (Black)")
                 print('Please write what figure you choose to move: B1koenig, etc...')
                 choice = input()
                 if choice == 'B1koenig':

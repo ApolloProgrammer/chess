@@ -45,7 +45,7 @@ class Board:
         self.board[59][2]='B1dame'
         self.board[60][2]='B1koenig'
         self.board[61][2]='B2laeufer'
-        self.board[62][2]='B2pferds'
+        self.board[62][2]='B2pferd'
         self.board[63][2]='B2turm'
 
         return self.board
@@ -130,7 +130,7 @@ class Board:
             if element[2][0]!=ownTeam:
                 if element[2][0]=='.':
                     Spalte.append(element)
-                elif element[2][0]==ownTeam:
+                elif element[2][0]==opponent:
                     Spalte.append(element)
                     break
             else:
@@ -176,5 +176,172 @@ class Board:
                 return True,potentialFields
                 break
         return False,potentialFields
+
+    def givepotentialLauferDestination(self,x,y,x_des,y_des): #method checks wether the given move of a laufer is legit or not. If not, then it shows approved moves.
+        potentialFields=[]
+        x_letter = Board.translateNumbertoLetter(self, x)
+        x_des_letter = Board.translateNumbertoLetter(self, x_des)
+        status_quo = Board.giveStatusofField(self, x_letter, y)
+
+        ownTeam=''
+        opponent=''
+        if status_quo[0]=='W':
+            ownTeam = 'W'
+            opponent = 'B'
+        else:
+            ownTeam = 'B'
+            opponent = 'W'
+
+        up_right=[]
+        up_left=[]
+        down_right=[]
+        down_left=[]
+
+        #up_right
+        x_search = x
+        y_search = y
+        for i in range(1,7):
+            x_search+=1
+            y_search+=1
+            condition = False  # breaking the outer loop
+            for field in self.board:
+                if Board.translateLettertoNumber(self,field[0])==x_search and field[1]==y_search:
+                    if Board.translateLettertoNumber(self,field[0])!=8 and field[1]!=8:
+                        up_right.append(field)
+                    else:
+                        up_right.append(field)
+                        condition = True
+                        break
+            if condition == True:
+                break
+
+        #up_left
+        x_search = x
+        y_search = y
+        for i in range(1,7):
+            x_search+=1
+            y_search-=1
+            condition = False  # breaking the outer loop
+            for field in self.board:
+                if Board.translateLettertoNumber(self,field[0])==x_search and field[1]==y_search:
+                    if Board.translateLettertoNumber(self,field[0])!=8 and field[1]!=1:
+                        up_left.append(field)
+                    else:
+                        up_left.append(field)
+                        condition = True
+                        break
+            if condition == True:
+                break
+
+        #down_right
+        x_search = x
+        y_search = y
+        for i in range(1,7):
+            x_search-=1
+            y_search+=1
+            condition=False #breaking the outer loop
+            for field in self.board:
+                if Board.translateLettertoNumber(self,field[0])==x_search and field[1]==y_search:
+                    if Board.translateLettertoNumber(self,field[0])!=1 and field[1]!=8:
+                        down_right.append(field)
+                    else:
+                        down_right.append(field)
+                        condition=True
+                        break
+            if condition==True:
+                break
+
+        #down_left
+        x_search = x
+        y_search = y
+        for i in range(1,7):
+            x_search-=1
+            y_search-=1
+            condition = False  # breaking the outer loop
+            for field in self.board:
+                if Board.translateLettertoNumber(self,field[0])==x_search and field[1]==y_search:
+                    if Board.translateLettertoNumber(self,field[0])!=1 and field[1]!=1:
+                        down_left.append(field)
+                    else:
+                        down_left.append(field)
+                        condition = True
+                        break
+            if condition == True:
+                break
+
+        #Prohibiting phenomenon of Jumping
+
+        #down_left_checked
+        down_left_checked=[]
+        for element in down_left:
+            if element[2][0] != ownTeam:
+                if element[2][0] == '.':
+                    down_left_checked.append(element)
+                elif element[2][0] == opponent:
+                    down_left_checked.append(element)
+                    break
+            else:
+                break
+
+        # up_right_checked
+        up_right_checked = []
+        for element in up_right:
+            if element[2][0] != ownTeam:
+                if element[2][0] == '.':
+                    up_right_checked.append(element)
+                elif element[2][0] == opponent:
+                    up_right_checked.append(element)
+                    break
+            else:
+                break
+
+        #down_right_checked
+        down_right_checked=[]
+        for element in down_right:
+            if element[2][0] != ownTeam:
+                if element[2][0] == '.':
+                    down_right_checked.append(element)
+                elif element[2][0] == opponent:
+                    down_right_checked.append(element)
+                    break
+            else:
+                break
+
+        # up_left_checked
+        up_left_checked = []
+        for element in up_left:
+            if element[2][0] != ownTeam:
+                if element[2][0] == '.':
+                    up_left_checked.append(element)
+                elif element[2][0] == opponent:
+                    up_left_checked.append(element)
+                    break
+            else:
+                break
+
+        #to check if code works, print each filtered list that prohobits jumping
+        # for element in down_left_checked[::-1]:
+        #     print(element)
+        # print()
+        # for element in up_right_checked:
+        #     print(element)
+        # print()
+        # for element in down_right_checked[::-1]:
+        #     print(element)
+        # print()
+        # for element in up_left_checked:
+        #     print(element)
+
+        filtered_potentialFields=down_left_checked[::-1] + up_right_checked + down_right_checked[::-1] + up_left_checked
+        Diagonale1=down_left_checked[::-1] + up_right_checked
+        Diagonale2=down_right_checked[::-1] + up_left_checked
+        for element in filtered_potentialFields:
+            if x_des_letter == element[0] and y_des == element[1]:
+                return True, Diagonale1, Diagonale2
+                break
+        return False, Diagonale1, Diagonale2
+
+
+
 
 
