@@ -379,7 +379,6 @@ class W1bauer(b.Board):
                     x_des = b.Board.translateLettertoNumber(self, destination_x_WB1)
                     y_pos = self.position_y_WB1
                     y_des = destination_y_WB1
-                    print(status)
 
                     if ((status[0] == '.' and x_pos == 2 and (x_pos + 1 == x_des or x_pos + 2 == x_des) and y_pos == y_des) or
                         (status[0] == '.' and x_pos != 2 and x_pos + 1 == x_des and y_pos == y_des) or

@@ -46,19 +46,25 @@ class Engine(white.W1koenig):
 
 
     def play(self):
+        print('Welcome to FOXCHESS!')
+        print()
         b.Board.showDataofBoard(self)
 
         counter = 0
-        while True:
+        end = False
+        check_againstBlack = 0 # if 0, then no check; elif 1, then check; elif 2, then checkMate (end)
+        check_againstWhite = 0
+        while end == False:
             if counter%2==0:
+                print()
                 print("Its the turn of Player 1! (White)")
                 print('Please write what figure you choose to move: W1koenig, etc...')
-                choice=input()
+                choice = input()
+
                 if  choice == 'W1koenig':
                     white.W1koenig.move(self)
                     b.Board.showDataofBoard(self)
                     counter+=1
-                    print(counter)
                 elif  choice == 'W1dame':
                     white.W1dame.move(self)
                     b.Board.showDataofBoard(self)
@@ -121,12 +127,192 @@ class Engine(white.W1koenig):
                     counter += 1
                 else:
                     print ('please choose again')
+
+                #white->black
+                # CKECKING WHETHER CHECK OR NOT
+                # all possible killing destinations of each white player are stored in big list
+                # if the position of the black king is in that list, white creates a CHECK situation for black
+
+
+                wkoenig = b.Board.givepotentialKingDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                    white.W1koenig.__getattribute__(
+                                                                                                        self,
+                                                                                                        'position_x_WK')),
+                                                              white.W1koenig.__getattribute__(self,
+                                                                                              'position_y_WK'))
+
+                wdame1 = b.Board.givepotentialLauferDestination(self,
+                                                               b.Board.translateLettertoNumber(self,
+                                                                                               white.W1dame.__getattribute__(
+                                                                                                   self,
+                                                                                                   'position_x_WD')),
+                                                               white.W1dame.__getattribute__(self, 'position_y_WD'),
+                                                               1, 1)[1]
+                wdame2 = b.Board.givepotentialLauferDestination(self,
+                                                               b.Board.translateLettertoNumber(self,
+                                                                                               white.W1dame.__getattribute__(
+                                                                                                   self,
+                                                                                                   'position_x_WD')),
+                                                               white.W1dame.__getattribute__(self, 'position_y_WD'),
+                                                               1, 1)[2]
+                wdame3 = b.Board.givepotentialTurmDestination(self,
+                                                             b.Board.translateLettertoNumber(self,
+                                                                                             white.W1dame.__getattribute__(
+                                                                                                 self,
+                                                                                                 'position_x_WD')),
+                                                             white.W1dame.__getattribute__(self, 'position_y_WD'),
+                                                             1, 1)[1]
+                wdame = wdame1 + wdame2 + wdame3
+
+                wlaeufer1_1 = b.Board.givepotentialLauferDestination(self,
+                                                                    b.Board.translateLettertoNumber(self,
+                                                                                                    white.W1laeufer.__getattribute__(
+                                                                                                        self,
+                                                                                                        'position_x_WL1')),
+                                                                    white.W1laeufer.__getattribute__(self,
+                                                                                                     'position_y_WL1'),
+                                                                    1, 1)[1]
+                wlaeufer1_2 = b.Board.givepotentialLauferDestination(self,
+                                                                    b.Board.translateLettertoNumber(self,
+                                                                                                    white.W1laeufer.__getattribute__(
+                                                                                                        self,
+                                                                                                        'position_x_WL1')),
+                                                                    white.W1laeufer.__getattribute__(self,
+                                                                                                     'position_y_WL1'),
+                                                                    1, 1)[2]
+                wlaeufer1 = wlaeufer1_1 + wlaeufer1_2
+
+                wlaeufer2_1 = b.Board.givepotentialLauferDestination(self,
+                                                                    b.Board.translateLettertoNumber(self,
+                                                                                                    white.W2laeufer.__getattribute__(
+                                                                                                        self,
+                                                                                                        'position_x_WL2')),
+                                                                    white.W2laeufer.__getattribute__(self,
+                                                                                                     'position_y_WL2'),
+                                                                    1, 1)[1]
+                wlaeufer2_2 = b.Board.givepotentialLauferDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          white.W2laeufer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_WL2')),
+                                                                    white.W2laeufer.__getattribute__(self,
+                                                                                                     'position_y_WL2'),
+                                                                    1, 1)[2]
+                wlaeufer2 = wlaeufer2_1 + wlaeufer2_2
+
+                wpferd1 = b.Board.givepotentialSpringerDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                        white.W1pferd.__getattribute__(
+                                                                                                            self,
+                                                                                                            'position_x_WP1')),
+                                                                  white.W1pferd.__getattribute__(self,
+                                                                                                 'position_y_WP1'))
+                wpferd2 = b.Board.givepotentialSpringerDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                        white.W2pferd.__getattribute__(
+                                                                                                            self,
+                                                                                                            'position_x_WP2')),
+                                                                  white.W2pferd.__getattribute__(self,
+                                                                                                 'position_y_WP2'))
+
+                wturm1 = b.Board.givepotentialTurmDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                   white.W1turm.__getattribute__(
+                                                                                                       self,
+                                                                                                       'position_x_WT1')),
+                                                             white.W1turm.__getattribute__(self, 'position_y_WT1'),
+                                                             1, 1)[1]
+                wturm2 = b.Board.givepotentialTurmDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                   white.W2turm.__getattribute__(
+                                                                                                       self,
+                                                                                                       'position_x_WT2')),
+                                                             white.W2turm.__getattribute__(self, 'position_y_WT2'),
+                                                             1, 1)[1]
+
+                wbauer1 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W1bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB1')),
+                                                                   white.W1bauer.__getattribute__(self,
+                                                                                                  'position_y_WB1'))
+                wbauer2 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W2bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB2')),
+                                                                   white.W2bauer.__getattribute__(self,
+                                                                                                  'position_y_WB2'))
+                wbauer3 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W3bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB3')),
+                                                                   white.W3bauer.__getattribute__(self,
+                                                                                                  'position_y_WB3'))
+                wbauer4 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W4bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB4')),
+                                                                   white.W4bauer.__getattribute__(self,
+                                                                                                  'position_y_WB4'))
+                wbauer5 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W5bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB5')),
+                                                                   white.W5bauer.__getattribute__(self,
+                                                                                                  'position_y_WB5'))
+                wbauer6 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W6bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB6')),
+                                                                   white.W6bauer.__getattribute__(self,
+                                                                                                  'position_y_WB6'))
+                wbauer7 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W7bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB7')),
+                                                                   white.W7bauer.__getattribute__(self,
+                                                                                                  'position_y_WB7'))
+                wbauer8 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         white.W8bauer.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_WB8')),
+                                                                   white.W8bauer.__getattribute__(self,
+                                                                                                  'position_y_WB8'))
+                # possible Killing Destinations
+                potentialKillingFields_WHITE = wkoenig + wdame + wlaeufer1 + wlaeufer2 + wpferd1 + wpferd2 + wturm1 + wturm2 + wbauer1 + wbauer2 + wbauer3 + wbauer4 + wbauer5 + wbauer6 + wbauer7 + wbauer8
+
+                # condition for check
+                if check_againstBlack==0:
+                    for element in potentialKillingFields_WHITE:
+                        if black.B1koenig.__getattribute__(self, 'position_x_BK') == element[
+                            0] and black.B1koenig.__getattribute__(self, 'position_y_BK') == element[1]:
+                            check_againstBlack = 1
+                            print('Check! (black)')
+                            break
+
+
+                # black->white
+                # checking if checkMate is appropiate (when check and the king has no )
+                if check_againstWhite == 1:
+                    for element in potentialKillingFields_BLACK:
+                        if white.W1koenig.__getattribute__(self, 'position_x_WK') == element[
+                            0] and white.W1koenig.__getattribute__(self, 'position_y_WK') == element[
+                            1]:  # if already check and player black could not handle the chack and is still in check position, then he lost due to checkMate
+                            print('WHITE IS CHECK MATE!')
+                            print('BLACK WINS! CONGRATULATIONS!!!')
+                            end = True
+                            break
+                        else:  # player black could defend himself. no check anymore. right now not in check/danger for checkMate
+                            check_againstWhite = 0
+
+
             #turn of Player2(black)
             else:
+                print()
                 print("Its the turn of Player 2! (Black)")
                 print('Please write what figure you choose to move: B1koenig, etc...')
                 choice = input()
-                if choice == 'B1koenig':
+
+                check  = False
+                if check == True:
+                    print('Check(black)')
+
+                elif choice == 'B1koenig':
                     black.B1koenig.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
@@ -192,3 +378,175 @@ class Engine(white.W1koenig):
                     counter += 1
                 else:
                     print('please choose again')
+
+                # black->white
+                # CKECKING WHETHER CHECK OR NOT
+                # all possible killing destinations of each black player are stored in big list
+                # if the position of the white king is in that list, white creates a CHECK situation for white
+
+                bkoenig = b.Board.givepotentialKingDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                     black.B1koenig.__getattribute__(
+                                                                                                         self,
+                                                                                                         'position_x_BK')),
+                                                               black.B1koenig.__getattribute__(self,
+                                                                                               'position_y_BK'))
+
+                bdame1 = b.Board.givepotentialLauferDestination(self,
+                                                                b.Board.translateLettertoNumber(self,
+                                                                                                black.B1dame.__getattribute__(
+                                                                                                    self,
+                                                                                                    'position_x_BD')),
+                                                                black.B1dame.__getattribute__(self, 'position_y_BD'),
+                                                                1, 1)[1]
+                bdame2 = b.Board.givepotentialLauferDestination(self,
+                                                                b.Board.translateLettertoNumber(self,
+                                                                                                black.B1dame.__getattribute__(
+                                                                                                    self,
+                                                                                                    'position_x_BD')),
+                                                                black.B1dame.__getattribute__(self, 'position_y_BD'),
+                                                                1, 1)[2]
+                bdame3 = b.Board.givepotentialTurmDestination(self,
+                                                              b.Board.translateLettertoNumber(self,
+                                                                                              black.B1dame.__getattribute__(
+                                                                                                  self,
+                                                                                                  'position_x_BD')),
+                                                              black.B1dame.__getattribute__(self, 'position_y_BD'),
+                                                              1, 1)[1]
+                bdame = bdame1 + bdame2 + bdame3
+
+                blaeufer1_1 = b.Board.givepotentialLauferDestination(self,
+                                                                     b.Board.translateLettertoNumber(self,
+                                                                                                     black.B1laeufer.__getattribute__(
+                                                                                                         self,
+                                                                                                         'position_x_BL1')),
+                                                                     black.B1laeufer.__getattribute__(self,
+                                                                                                      'position_y_BL1'),
+                                                                     1, 1)[1]
+                blaeufer1_2 = b.Board.givepotentialLauferDestination(self,
+                                                                     b.Board.translateLettertoNumber(self,
+                                                                                                     black.B1laeufer.__getattribute__(
+                                                                                                         self,
+                                                                                                         'position_x_BL1')),
+                                                                     black.B1laeufer.__getattribute__(self,
+                                                                                                      'position_y_BL1'),
+                                                                     1, 1)[2]
+                blaeufer1 = blaeufer1_1 + blaeufer1_2
+
+                blaeufer2_1 = b.Board.givepotentialLauferDestination(self,
+                                                                     b.Board.translateLettertoNumber(self,
+                                                                                                     black.B2laeufer.__getattribute__(
+                                                                                                         self,
+                                                                                                         'position_x_BL2')),
+                                                                     black.B2laeufer.__getattribute__(self,
+                                                                                                      'position_y_BL2'),
+                                                                     1, 1)[1]
+                blaeufer2_2 = b.Board.givepotentialLauferDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                           black.B2laeufer.__getattribute__(
+                                                                                                               self,
+                                                                                                               'position_x_BL2')),
+                                                                     black.B2laeufer.__getattribute__(self,
+                                                                                                      'position_y_BL2'),
+                                                                     1, 1)[2]
+                blaeufer2 = blaeufer2_1 + blaeufer2_2
+
+                bpferd1 = b.Board.givepotentialSpringerDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         black.B1pferd.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_BP1')),
+                                                                   black.B1pferd.__getattribute__(self,
+                                                                                                  'position_y_BP1'))
+                bpferd2 = b.Board.givepotentialSpringerDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                         black.B2pferd.__getattribute__(
+                                                                                                             self,
+                                                                                                             'position_x_BP2')),
+                                                                   black.B2pferd.__getattribute__(self,
+                                                                                                  'position_y_BP2'))
+
+                bturm1 = b.Board.givepotentialTurmDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                    black.B1turm.__getattribute__(
+                                                                                                        self,
+                                                                                                        'position_x_BT1')),
+                                                              black.B1turm.__getattribute__(self, 'position_y_BT1'),
+                                                              1, 1)[1]
+                bturm2 = b.Board.givepotentialTurmDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                    black.B2turm.__getattribute__(
+                                                                                                        self,
+                                                                                                        'position_x_BT2')),
+                                                              black.B2turm.__getattribute__(self, 'position_y_BT2'),
+                                                              1, 1)[1]
+
+                bbauer1 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B1bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB1')),
+                                                                    black.B1bauer.__getattribute__(self,
+                                                                                                   'position_y_BB1'))
+                bbauer2 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B2bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB2')),
+                                                                    black.B2bauer.__getattribute__(self,
+                                                                                                   'position_y_BB2'))
+                bbauer3 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B3bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB3')),
+                                                                    black.B3bauer.__getattribute__(self,
+                                                                                                   'position_y_BB3'))
+                bbauer4 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B4bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB4')),
+                                                                    black.B4bauer.__getattribute__(self,
+                                                                                                   'position_y_BB4'))
+                bbauer5 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B5bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB5')),
+                                                                    black.B5bauer.__getattribute__(self,
+                                                                                                   'position_y_BB5'))
+                bbauer6 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B6bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB6')),
+                                                                    black.B6bauer.__getattribute__(self,
+                                                                                                   'position_y_BB6'))
+                bbauer7 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B7bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB7')),
+                                                                    black.B7bauer.__getattribute__(self,
+                                                                                                   'position_y_BB7'))
+                bbauer8 = b.Board.givepotentialBauerKillDestination(self, b.Board.translateLettertoNumber(self,
+                                                                                                          black.B8bauer.__getattribute__(
+                                                                                                              self,
+                                                                                                              'position_x_BB8')),
+                                                                    black.B8bauer.__getattribute__(self,
+                                                                                                   'position_y_BB8'))
+                # possible Killing Destinations
+                potentialKillingFields_BLACK = bkoenig + bdame + blaeufer1 + blaeufer2 + bpferd1 + bpferd2 + bturm1 + bturm2 + bbauer1 + bbauer2 + bbauer3 + bbauer4 + bbauer5 + bbauer6 + bbauer7 + bbauer8
+
+                # condition for check
+                if check_againstWhite == 0:
+                    for element in potentialKillingFields_BLACK:
+                        if white.W1koenig.__getattribute__(self, 'position_x_WK') == element[
+                            0] and white.W1koenig.__getattribute__(self, 'position_y_WK') == element[1]:
+                            check_againstWhite = 1
+                            print('Check! (black->white)')
+                            break
+
+
+
+                #white->black
+                # checking if checkMate is appropiate (when check and the king has no )
+                if check_againstBlack == 1:
+                    for element in potentialKillingFields_WHITE:
+                        if black.B1koenig.__getattribute__(self, 'position_x_BK') == element[
+                            0] and black.B1koenig.__getattribute__(self, 'position_y_BK') == element[1]: #if already check and player black could not handle the chack and is still in check position, then he lost due to checkMate
+                            print('BLACK IS CHECK MATE!')
+                            print('WHITE WINS! CONGRATULATIONS!!!')
+                            end = True
+                            break
+                        else: #player black could defend himself. no check anymore. right now not in check/danger for checkMate
+                            check_againstBlack = 0
+

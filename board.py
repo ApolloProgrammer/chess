@@ -2,6 +2,7 @@
 class Board:
     def __init__(self):
         self.board = self.createBoard()
+
     def createBoard(self):
         self.board=[]
         spalten='ABCDEFGH'
@@ -68,6 +69,14 @@ class Board:
                 status=field[2]
                 break
         return status
+
+    def giveElement_withspecificCoordinates(self,x,y):
+        heureka=[]
+        for field in self.board:
+            if field[0] == Board.translateNumbertoLetter(self,x) and field[1] == y:
+                heureka = field
+                break
+        return heureka
 
     def givePostionofFigure(self,figure):
         for field in self.board:
@@ -341,7 +350,63 @@ class Board:
                 break
         return False, Diagonale1, Diagonale2
 
+    def givepotentialKingDestination(self,x,y): #not filtered -> even positions of the own team can be included. But that does not matter, because as long as we can if the opponemnts king is included, checking for check works out.
+        potentialFields = []
+        if x>1 and y<8:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x-1, y+1))
+        if y<8:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x, y+1))
+        if x < 8 and y < 8:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x+1, y+1))
+        if x>1:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x-1, y))
+        if x<8:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x+1, y))
+        if x>1 and y>1:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x-1, y-1))
+        if y>1:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x, y-1))
+        if x<8 and y>1:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x+1, y-1))
+        return potentialFields
 
+    def givepotentialSpringerDestination(self, x, y):
+        potentialFields = []
+        if x > 1 and int(y) < 7:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x - 1, y + 2))
+        if x < 8 and y < 7:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x + 1, y + 2))
+        if x > 2 and y < 8:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x - 2, y + 1))
+        if x < 7 and y < 8:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x + 2, y + 1))
+        if x > 2 and y > 1:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x - 2, y - 1))
+        if x < 7 and y > 1:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x + 2, y - 1))
+        if x > 1 and y > 2:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x - 1, y - 2))
+        if x < 8 and y > 2:
+            potentialFields.append(Board.giveElement_withspecificCoordinates(self, x + 1, y - 2))
+        return potentialFields
+
+    def givepotentialBauerKillDestination(self, x, y):
+        potentialFields = []
+        x_letter = Board.translateNumbertoLetter(self, x)
+        status_quo = Board.giveStatusofField(self, x_letter, y)
+        ownTeam = ''
+        opponent = ''
+        if status_quo[0] == 'W':
+            if x < 8 and y > 1:
+                potentialFields.append(Board.giveElement_withspecificCoordinates(self, x + 1, y - 1))
+            if x < 8 and y < 8:
+                potentialFields.append(Board.giveElement_withspecificCoordinates(self, x + 1, y + 1))
+        else:
+            if x > 1 and y > 1:
+                potentialFields.append(Board.giveElement_withspecificCoordinates(self, x - 1, y - 1))
+            if x > 1 and y < 8:
+                potentialFields.append(Board.giveElement_withspecificCoordinates(self, x - 1, y + 1))
+        return potentialFields
 
 
 
