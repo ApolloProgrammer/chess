@@ -8,10 +8,7 @@ class Board:
         spalten='ABCDEFGH'
         for spalte in spalten:
             for i in range(1,9):
-                # if i%2==0:
                 self.board.append([spalte,i,'.......'])
-                # else:
-                    # self.board.append([spalte,i,'empty',1])
         #white
         self.board[0][2]='W1turm'
         self.board[1][2]='W1pferd'

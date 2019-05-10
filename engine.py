@@ -58,7 +58,7 @@ class Engine(white.W1koenig):
             if counter%2==0:
                 print()
                 print("Its the turn of Player 1! (White)")
-                print('Please write what figure you choose to move: W1koenig, etc...')
+                print('Please write what figure you choose to move: W1koenig, W1dame, ..., W8bauer, Rochade')
                 choice = input()
 
                 if  choice == 'W1koenig':
@@ -125,6 +125,42 @@ class Engine(white.W1koenig):
                     white.W8bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
+                elif choice == 'Rochade':
+                    print('Which Rochade? Left or Right?')
+                    Rochade_choice=str(input())
+                    if Rochade_choice=='Left':
+                        if (white.W1koenig.__getattribute__(self,'position_x_WK') == 'A' and white.W1koenig.__getattribute__(
+                                self, 'position_y_WK') == 5) and (white.W1turm.__getattribute__(self,'position_x_WT1') == 'A' and white.W1turm.__getattribute__(
+                                self, 'position_y_WT1') == 1) and b.Board.giveStatusofField(self, 'A',2) == '.......' and b.Board.giveStatusofField(
+                                self, 'A', 3) == '.......' and b.Board.giveStatusofField(self, 'A', 4) == '.......':
+                            b.Board.changeAfield(self, white.W1koenig.__getattribute__(self,'position_x_WK'), white.W1koenig.__getattribute__(self,'position_y_WK'), '.......')
+                            white.W1koenig.__setattr__(self, 'position_y_WK', 3)
+                            b.Board.changeAfield(self, white.W1turm.__getattribute__(self,'position_x_WT1'), white.W1turm.__getattribute__(self,'position_y_WT1'), '.......')
+                            white.W1koenig.__setattr__(self, 'position_y_WT1', 4)
+                            b.Board.changeAfield(self, 'A', 3, 'W1koenig')
+                            b.Board.changeAfield(self, 'A', 4, 'W1turm')
+                            b.Board.showDataofBoard(self)
+                            counter += 1
+                        else:
+                            print('Move is not allowed!')
+
+                    elif Rochade_choice=='Right':
+                        if (white.W1koenig.__getattribute__(self,'position_x_WK') == 'A' and white.W1koenig.__getattribute__(
+                                self, 'position_y_WK') == 5) and (white.W2turm.__getattribute__(self,'position_x_WT2') == 'A' and white.W2turm.__getattribute__(
+                                self, 'position_y_WT2') == 8) and b.Board.giveStatusofField(self, 'A',6) == '.......' and b.Board.giveStatusofField(
+                                self, 'A', 7) == '.......':
+                            print('Move approved!')
+                            b.Board.changeAfield(self, white.W1koenig.__getattribute__(self,'position_x_WK'), white.W1koenig.__getattribute__(self,'position_y_WK'), '.......')
+                            white.W1koenig.__setattr__(self, 'position_y_WK', 7)
+                            b.Board.changeAfield(self, white.W2turm.__getattribute__(self,'position_x_WT2'), white.W2turm.__getattribute__(self,'position_y_WT2'), '.......')
+                            white.W2turm.__setattr__(self, 'position_y_WT2', 6)
+                            b.Board.changeAfield(self, 'A', 7, 'W1koenig')
+                            b.Board.changeAfield(self, 'A', 6, 'W2turm')
+                            b.Board.showDataofBoard(self)
+                            counter += 1
+                        else:
+                            print('Move is not allowed!')
+
                 else:
                     print ('please choose again')
 
@@ -305,7 +341,7 @@ class Engine(white.W1koenig):
             else:
                 print()
                 print("Its the turn of Player 2! (Black)")
-                print('Please write what figure you choose to move: B1koenig, etc...')
+                print('Please write what figure you choose to move: B1koenig, B1dame, ..., B8bauer, Rochade')
                 choice = input()
 
                 check  = False
@@ -375,7 +411,46 @@ class Engine(white.W1koenig):
                 elif  choice == 'B8bauer':
                     black.B8bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    counter += 1
+                    counter += 1#
+                elif choice == 'Rochade':
+                    print('Which Rochade? Left or Right? (Perspective from top onto the field)')
+                    Rochade_choice = str(input())
+                    if Rochade_choice == 'Left':
+                        if (black.B1koenig.__getattribute__(self,'position_x_BK') == 'H' and black.B1koenig.__getattribute__(
+                                self, 'position_y_BK') == 5) and (black.B1turm.__getattribute__(self,'position_x_BT1') == 'H' and black.B1turm.__getattribute__(
+                            self, 'position_y_BT1') == 1) and b.Board.giveStatusofField(self, 'H', 2) == '.......' and b.Board.giveStatusofField(
+                            self, 'H', 3) == '.......' and b.Board.giveStatusofField(self, 'H', 4) == '.......':
+                            b.Board.changeAfield(self, black.B1koenig.__getattribute__(self, 'position_x_BK'),
+                                                 black.B1koenig.__getattribute__(self, 'position_y_BK'), '.......')
+                            black.B1koenig.__setattr__(self, 'position_y_BK', 3)
+                            b.Board.changeAfield(self, black.B1turm.__getattribute__(self, 'position_x_BT1'),
+                                                 black.B1turm.__getattribute__(self, 'position_y_BT1'), '.......')
+                            black.B1koenig.__setattr__(self, 'position_y_BT1', 4)
+                            b.Board.changeAfield(self, 'H', 3, 'B1koenig')
+                            b.Board.changeAfield(self, 'H', 4, 'B1turm')
+                            b.Board.showDataofBoard(self)
+                            counter += 1
+                        else:
+                            print('Move is not allowed!')
+
+                    elif Rochade_choice == 'Right':
+                        if (black.B1koenig.__getattribute__(self,'position_x_BK') == 'H' and black.B1koenig.__getattribute__(
+                            self, 'position_y_BK') == 5) and (black.B2turm.__getattribute__(self,'position_x_BT2') == 'H' and black.B2turm.__getattribute__(
+                            self, 'position_y_BT2') == 8) and b.Board.giveStatusofField(self, 'H',6) == '.......' and b.Board.giveStatusofField(
+                            self, 'H', 7) == '.......':
+                            print('Move approved!')
+                            b.Board.changeAfield(self, black.B1koenig.__getattribute__(self, 'position_x_BK'),black.B1koenig.__getattribute__(self, 'position_y_BK'), '.......')
+                            black.B1koenig.__setattr__(self, 'position_y_BK', 7)
+                            b.Board.changeAfield(self, black.B2turm.__getattribute__(self, 'position_x_BT2'),
+                                                 black.B2turm.__getattribute__(self, 'position_y_BT2'), '.......')
+                            black.B2turm.__setattr__(self, 'position_y_BT2', 6)
+                            b.Board.changeAfield(self, 'H', 7, 'B1koenig')
+                            b.Board.changeAfield(self, 'H', 6, 'B2turm')
+                            b.Board.showDataofBoard(self)
+                            counter += 1
+                        else:
+                            print('Move is not allowed!')
+
                 else:
                     print('please choose again')
 
