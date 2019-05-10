@@ -93,35 +93,35 @@ class Engine(white.W1koenig):
                     white.W2turm.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W1bauer':
+                elif  choice == white.W1bauer.__getattribute__(self, 'name_WB1'):
                     white.W1bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W2bauer':
+                elif  choice == white.W2bauer.__getattribute__(self, 'name_WB2'):
                     white.W2bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W3bauer':
+                elif  choice == white.W3bauer.__getattribute__(self, 'name_WB3'):
                     white.W3bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W4bauer':
+                elif  choice == white.W4bauer.__getattribute__(self, 'name_WB4'):
                     white.W4bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W5bauer':
+                elif  choice == white.W5bauer.__getattribute__(self, 'name_WB5'):
                     white.W5bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W6bauer':
+                elif  choice == white.W6bauer.__getattribute__(self, 'name_WB6'):
                     white.W6bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W7bauer':
+                elif  choice == white.W7bauer.__getattribute__(self, 'name_WB7'):
                     white.W7bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'W8bauer':
+                elif  choice == white.W8bauer.__getattribute__(self, 'name_WB8'):
                     white.W8bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
@@ -380,38 +380,38 @@ class Engine(white.W1koenig):
                     black.B2turm.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B1bauer':
+                elif  choice == black.B1bauer.__getattribute__(self, 'name_BB1'):
                     black.B1bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B2bauer':
+                elif  choice == black.B2bauer.__getattribute__(self, 'name_BB2'):
                     black.B2bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B3bauer':
+                elif  choice == black.B3bauer.__getattribute__(self, 'name_BB3'):
                     black.B3bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B4bauer':
+                elif  choice == black.B4bauer.__getattribute__(self, 'name_BB4'):
                     black.B4bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B5bauer':
+                elif  choice == black.B5bauer.__getattribute__(self, 'name_BB5'):
                     black.B5bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B6bauer':
+                elif  choice == black.B6bauer.__getattribute__(self, 'name_BB6'):
                     black.B6bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B7bauer':
+                elif  choice == black.B7bauer.__getattribute__(self, 'name_BB7'):
                     black.B7bauer.move(self)
                     b.Board.showDataofBoard(self)
                     counter += 1
-                elif  choice == 'B8bauer':
+                elif  choice == black.B8bauer.__getattribute__(self, 'name_BB8'):
                     black.B8bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    counter += 1#
+                    counter += 1
                 elif choice == 'Rochade':
                     print('Which Rochade? Left or Right? (Perspective from top onto the field)')
                     Rochade_choice = str(input())

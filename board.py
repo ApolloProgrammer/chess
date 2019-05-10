@@ -10,7 +10,7 @@ class Board:
             for i in range(1,9):
                 self.board.append([spalte,i,'.......'])
         #white
-        self.board[0][2]='W1turm'
+        #self.board[0][2]='W1turm'
         self.board[1][2]='W1pferd'
         self.board[2][2]='W1laeufer'
         self.board[3][2]='W1dame'
@@ -19,7 +19,7 @@ class Board:
         self.board[6][2]='W2pferd'
         self.board[7][2]='W2turm'
 
-        self.board[8][2]='W1bauer'
+        #self.board[8][2]='W1bauer'
         self.board[9][2]='W2bauer'
         self.board[10][2]='W3bauer'
         self.board[11][2]='W4bauer'
