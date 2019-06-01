@@ -6,17 +6,18 @@ import board as b
 
 class Visual(Frame):
 
-    def __init__(self):
+    def __init__(self,meta):
         super().__init__()
         #start drawing
         self.canvas = Canvas(self)
         physical_brett=self.draw_Board()#setup the board. physical_brett is the list with information about the location in pixel of every single field of the physical (GUI) board
 
-        self.showtheUpdate(physical_brett)#setup the figures
+        self.showtheUpdate(physical_brett,meta)#setup the figures
         self.canvas.pack(fill=BOTH, expand=1) #end drawing
 
-    def givePixelLocation(self, player, sol): #looks for the current location of a figure and returns its coordinates
-        physical_brett = b.Board.createBoard(self)
+    def givePixelLocation(self, player, sol, meta): #looks for the current location of a figure and returns its coordinates
+        # physical_brett = b.Board.createBoard(self)
+        physical_brett = meta
         n = 0
         for element in physical_brett:
             if element[2] == player:
@@ -87,7 +88,7 @@ class Visual(Frame):
 
 
     #Visualizing and Updating, conquering the chessboard by figures of both players
-    def showtheUpdate(self,sol): #sol is the list with information about the location in pixel of every single field of the physical (GUI) board
+    def showtheUpdate(self,sol,meta): #sol is the list with information about the location in pixel of every single field of the physical (GUI) board
 
         # Visualization Classes
         class Visual_Koenig():
@@ -150,30 +151,30 @@ class Visual(Frame):
                 self.canvas.create_oval(x - size / 2, y - size / 2, x + size / 2, y + size / 2, fill=color)
 
         #white
-        coordinates_W1koenig = self.givePixelLocation('W1koenig',sol)
+        coordinates_W1koenig = self.givePixelLocation('W1koenig',sol,meta)
         Visual_Koenig.visualize(self, coordinates_W1koenig[0], coordinates_W1koenig[1], 20, 0)
-        coordinates_W1dame=self.givePixelLocation('W1dame',sol)
+        coordinates_W1dame=self.givePixelLocation('W1dame',sol,meta)
         Visual_Dame.visualize(self,coordinates_W1dame[0],coordinates_W1dame[1], 20,0)
-        coordinates_W1turm = self.givePixelLocation('W1turm',sol)
+        coordinates_W1turm = self.givePixelLocation('W1turm',sol,meta)
         Visual_Turm.visualize(self, coordinates_W1turm[0], coordinates_W1turm[1], 20, 0)
-        coordinates_W2turm = self.givePixelLocation('W2turm',sol)
+        coordinates_W2turm = self.givePixelLocation('W2turm',sol,meta)
         Visual_Turm.visualize(self, coordinates_W2turm[0], coordinates_W2turm[1], 20, 0)
-        coordinates_W1laeufer = self.givePixelLocation('W1laeufer',sol)
+        coordinates_W1laeufer = self.givePixelLocation('W1laeufer',sol,meta)
         Visual_Laeufer.visualize(self, coordinates_W1laeufer[0], coordinates_W1laeufer[1], 20, 0)
-        coordinates_W2laeufer = self.givePixelLocation('W2laeufer',sol)
+        coordinates_W2laeufer = self.givePixelLocation('W2laeufer',sol,meta)
         Visual_Laeufer.visualize(self, coordinates_W2laeufer[0], coordinates_W2laeufer[1], 20, 0)
-        coordinates_W1pferd = self.givePixelLocation('W1pferd',sol)
+        coordinates_W1pferd = self.givePixelLocation('W1pferd',sol,meta)
         Visual_Pferd.visualize(self, coordinates_W1pferd[0], coordinates_W1pferd[1], 20, 0)
-        coordinates_W2pferd = self.givePixelLocation('W2pferd',sol)
+        coordinates_W2pferd = self.givePixelLocation('W2pferd',sol,meta)
         Visual_Pferd.visualize(self, coordinates_W2pferd[0], coordinates_W2pferd[1], 20, 0)
-        coordinates_W1bauer = self.givePixelLocation('W1bauer',sol)
-        coordinates_W2bauer = self.givePixelLocation('W2bauer',sol)
-        coordinates_W3bauer = self.givePixelLocation('W3bauer',sol)
-        coordinates_W4bauer = self.givePixelLocation('W4bauer',sol)
-        coordinates_W5bauer = self.givePixelLocation('W5bauer',sol)
-        coordinates_W6bauer = self.givePixelLocation('W6bauer',sol)
-        coordinates_W7bauer = self.givePixelLocation('W7bauer',sol)
-        coordinates_W8bauer = self.givePixelLocation('W8bauer',sol)
+        coordinates_W1bauer = self.givePixelLocation('W1bauer',sol,meta)
+        coordinates_W2bauer = self.givePixelLocation('W2bauer',sol,meta)
+        coordinates_W3bauer = self.givePixelLocation('W3bauer',sol,meta)
+        coordinates_W4bauer = self.givePixelLocation('W4bauer',sol,meta)
+        coordinates_W5bauer = self.givePixelLocation('W5bauer',sol,meta)
+        coordinates_W6bauer = self.givePixelLocation('W6bauer',sol,meta)
+        coordinates_W7bauer = self.givePixelLocation('W7bauer',sol,meta)
+        coordinates_W8bauer = self.givePixelLocation('W8bauer',sol,meta)
         Visual_Bauer.visualize(self, coordinates_W1bauer[0], coordinates_W1bauer[1], 20,0)
         Visual_Bauer.visualize(self, coordinates_W2bauer[0], coordinates_W2bauer[1], 20,0)
         Visual_Bauer.visualize(self, coordinates_W3bauer[0], coordinates_W3bauer[1], 20,0)
@@ -183,30 +184,30 @@ class Visual(Frame):
         Visual_Bauer.visualize(self, coordinates_W7bauer[0], coordinates_W7bauer[1], 20,0)
         Visual_Bauer.visualize(self, coordinates_W8bauer[0], coordinates_W8bauer[1], 20,0)
         #black
-        coordinates_B1koenig = self.givePixelLocation('B1koenig',sol)
+        coordinates_B1koenig = self.givePixelLocation('B1koenig',sol,meta)
         Visual_Koenig.visualize(self, coordinates_B1koenig[0], coordinates_B1koenig[1], 20, 1)
-        coordinates_B1dame = self.givePixelLocation('B1dame',sol)
+        coordinates_B1dame = self.givePixelLocation('B1dame',sol,meta)
         Visual_Dame.visualize(self, coordinates_B1dame[0], coordinates_B1dame[1], 20, 1)
-        coordinates_B1turm = self.givePixelLocation('B1turm',sol)
+        coordinates_B1turm = self.givePixelLocation('B1turm',sol,meta)
         Visual_Turm.visualize(self, coordinates_B1turm[0], coordinates_B1turm[1], 20, 1)
-        coordinates_B2turm = self.givePixelLocation('B2turm',sol)
+        coordinates_B2turm = self.givePixelLocation('B2turm',sol,meta)
         Visual_Turm.visualize(self, coordinates_B2turm[0], coordinates_B2turm[1], 20, 1)
-        coordinates_B1laeufer = self.givePixelLocation('B1laeufer',sol)
+        coordinates_B1laeufer = self.givePixelLocation('B1laeufer',sol,meta)
         Visual_Laeufer.visualize(self, coordinates_B1laeufer[0], coordinates_B1laeufer[1], 20, 1)
-        coordinates_B2laeufer = self.givePixelLocation('B2laeufer',sol)
+        coordinates_B2laeufer = self.givePixelLocation('B2laeufer',sol,meta)
         Visual_Laeufer.visualize(self, coordinates_B2laeufer[0], coordinates_B2laeufer[1], 20, 1)
-        coordinates_B1pferd = self.givePixelLocation('B1pferd',sol)
+        coordinates_B1pferd = self.givePixelLocation('B1pferd',sol,meta)
         Visual_Pferd.visualize(self, coordinates_B1pferd[0], coordinates_B1pferd[1], 20, 1)
-        coordinates_B2pferd = self.givePixelLocation('B2pferd',sol)
+        coordinates_B2pferd = self.givePixelLocation('B2pferd',sol,meta)
         Visual_Pferd.visualize(self, coordinates_B2pferd[0], coordinates_B2pferd[1], 20, 1)
-        coordinates_B1bauer = self.givePixelLocation('B1bauer',sol)
-        coordinates_B2bauer = self.givePixelLocation('B2bauer',sol)
-        coordinates_B3bauer = self.givePixelLocation('B3bauer',sol)
-        coordinates_B4bauer = self.givePixelLocation('B4bauer',sol)
-        coordinates_B5bauer = self.givePixelLocation('B5bauer',sol)
-        coordinates_B6bauer = self.givePixelLocation('B6bauer',sol)
-        coordinates_B7bauer = self.givePixelLocation('B7bauer',sol)
-        coordinates_B8bauer = self.givePixelLocation('B8bauer',sol)
+        coordinates_B1bauer = self.givePixelLocation('B1bauer',sol,meta)
+        coordinates_B2bauer = self.givePixelLocation('B2bauer',sol,meta)
+        coordinates_B3bauer = self.givePixelLocation('B3bauer',sol,meta)
+        coordinates_B4bauer = self.givePixelLocation('B4bauer',sol,meta)
+        coordinates_B5bauer = self.givePixelLocation('B5bauer',sol,meta)
+        coordinates_B6bauer = self.givePixelLocation('B6bauer',sol,meta)
+        coordinates_B7bauer = self.givePixelLocation('B7bauer',sol,meta)
+        coordinates_B8bauer = self.givePixelLocation('B8bauer',sol,meta)
         Visual_Bauer.visualize(self, coordinates_B1bauer[0], coordinates_B1bauer[1], 20, 1)
         Visual_Bauer.visualize(self, coordinates_B2bauer[0], coordinates_B2bauer[1], 20, 1)
         Visual_Bauer.visualize(self, coordinates_B3bauer[0], coordinates_B3bauer[1], 20, 1)
@@ -219,9 +220,9 @@ class Visual(Frame):
 
 
 
-root = Tk()
-root.geometry("400x400")
-board = Visual()
-root.mainloop()
+# root = Tk()
+# root.geometry("400x400")
+# board = Visual()
+# root.mainloop()
 
 
