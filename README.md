@@ -9,3 +9,11 @@ looking forward to build a GUI using Tkinter.
 I hope you enjoy my work.
 
 Edit: LOGIC COMPLETED!
+
+EDIT: Im starting the transformation of the console chess game to a minimalistic GUI.
+
+EDIT: The chess game can be played with the GUI. To accept a move consisting of choosing the figure and choosing
+      its destination, one has to close the GUI window. A new window with the next step (either question 
+      which figure to choose or question which destination to choose) will appear. Still the transformation from 
+      a console chess game to a GUI oriented chess is in progress. But everything seems to work out, even when its
+      quick and dirty sometimes.
