@@ -1,4 +1,4 @@
-#Developer: Marvin Fuchs, May 2019
+#Developer: Marvin Fuchs, May-June 2019
 
 import board as b
 import whitePlayer as white
@@ -46,20 +46,26 @@ class Engine(white.W1koenig):
         black.B2laeufer.__init__(self)
         black.B2pferd.__init__(self)
         black.B2turm.__init__(self)
+        self.choice=0
+        self.destination_choice=[]
 
 
-    def visualize(self,meta):
+    def visualize(self,meta,case):
         root = Tk()
         root.geometry("400x400")
-        board = gui.Visual(meta)
+        visual_board = gui.Visual(meta,case)
         root.mainloop()
-
+        if case==0:
+            self.choice = b.Board.__getattribute__(self, 'board')[visual_board.__getattribute__('player_choice')][2]
+        if case==1:
+            self.destination_choice=visual_board.__getattribute__('destination_choice')
+            print(self.destination_choice)
 
     def play(self):
         print('Welcome to FOXCHESS!')
         print()
         b.Board.showDataofBoard(self)
-        self.visualize(b.Board.__getattribute__(self, 'board'))
+        # self.visualize(b.Board.__getattribute__(self, 'board'))
         counter = 0
         end = False
         check_againstBlack = 0 # if 0, then no check; elif 1, then check; elif 2, then checkMate (end)
@@ -69,89 +75,90 @@ class Engine(white.W1koenig):
                 print()
                 print("Its the turn of Player 1! (White)")
                 print('Please write what figure you choose to move: W1koenig, W1dame, ..., W8bauer, Rochade')
-                choice = input()
+                self.visualize(b.Board.__getattribute__(self, 'board'),0)
+                print("Thats your choice: "+str(self.choice))
 
-                if  choice == 'W1koenig':
+                if  self.choice == 'W1koenig':
                     white.W1koenig.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter+=1
-                elif  choice == 'W1dame':
+                    self.choice=''
+                elif  self.choice == 'W1dame':
                     white.W1dame.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'W1laeufer':
+                    self.choice = ''
+                elif  self.choice == 'W1laeufer':
                     white.W1laeufer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'W2laeufer':
+                    self.choice = ''
+                elif  self.choice == 'W2laeufer':
                     white.W2laeufer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'W1pferd':
+                    self.choice = ''
+                elif  self.choice == 'W1pferd':
                     white.W1pferd.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'W2pferd':
+                    self.choice = ''
+                elif  self.choice == 'W2pferd':
                     white.W2pferd.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'W1turm':
+                    self.choice = ''
+                elif  self.choice == 'W1turm':
                     white.W1turm.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'W2turm':
+                    self.choice = ''
+                elif  self.choice == 'W2turm':
                     white.W2turm.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W1bauer.__getattribute__(self, 'name_WB1'):
+                    self.choice = ''
+                elif  self.choice == white.W1bauer.__getattribute__(self, 'name_WB1'):
                     white.W1bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W2bauer.__getattribute__(self, 'name_WB2'):
+                    self.choice = ''
+                elif  self.choice == white.W2bauer.__getattribute__(self, 'name_WB2'):
                     white.W2bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W3bauer.__getattribute__(self, 'name_WB3'):
+                    self.choice = ''
+                elif  self.choice == white.W3bauer.__getattribute__(self, 'name_WB3'):
                     white.W3bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W4bauer.__getattribute__(self, 'name_WB4'):
+                    self.choice = ''
+                elif  self.choice == white.W4bauer.__getattribute__(self, 'name_WB4'):
                     white.W4bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W5bauer.__getattribute__(self, 'name_WB5'):
+                    self.choice = ''
+                elif  self.choice == white.W5bauer.__getattribute__(self, 'name_WB5'):
                     white.W5bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W6bauer.__getattribute__(self, 'name_WB6'):
+                    self.choice = ''
+                elif  self.choice == white.W6bauer.__getattribute__(self, 'name_WB6'):
                     white.W6bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W7bauer.__getattribute__(self, 'name_WB7'):
+                    self.choice = ''
+                elif  self.choice == white.W7bauer.__getattribute__(self, 'name_WB7'):
                     white.W7bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == white.W8bauer.__getattribute__(self, 'name_WB8'):
+                    self.choice = ''
+                elif  self.choice == white.W8bauer.__getattribute__(self, 'name_WB8'):
                     white.W8bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif choice == 'Rochade':
+                    self.choice = ''
+                elif self.choice == 'Rochade':
                     print('Which Rochade? Left or Right?')
                     Rochade_choice=str(input())
                     if Rochade_choice=='Left':
@@ -166,8 +173,8 @@ class Engine(white.W1koenig):
                             b.Board.changeAfield(self, 'A', 3, 'W1koenig')
                             b.Board.changeAfield(self, 'A', 4, 'W1turm')
                             b.Board.showDataofBoard(self)
-                            self.visualize(b.Board.__getattribute__(self, 'board'))
                             counter += 1
+                            self.choice = ''
                         else:
                             print('Move is not allowed!')
 
@@ -184,8 +191,8 @@ class Engine(white.W1koenig):
                             b.Board.changeAfield(self, 'A', 7, 'W1koenig')
                             b.Board.changeAfield(self, 'A', 6, 'W2turm')
                             b.Board.showDataofBoard(self)
-                            self.visualize(b.Board.__getattribute__(self, 'board'))
                             counter += 1
+                            self.choice = ''
                         else:
                             print('Move is not allowed!')
 
@@ -370,93 +377,78 @@ class Engine(white.W1koenig):
                 print()
                 print("Its the turn of Player 2! (Black)")
                 print('Please write what figure you choose to move: B1koenig, B1dame, ..., B8bauer, Rochade')
-                choice = input()
+                self.visualize(b.Board.__getattribute__(self, 'board'),0)
+                print("Thats your choice: " + str(self.choice))
 
                 check  = False
                 if check == True:
                     print('Check(black)')
 
-                elif choice == 'B1koenig':
+                elif self.choice == 'B1koenig':
                     black.B1koenig.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B1dame':
+                elif  self.choice == 'B1dame':
                     black.B1dame.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B1laeufer':
+                elif  self.choice == 'B1laeufer':
                     black.B1laeufer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B2laeufer':
+                elif  self.choice == 'B2laeufer':
                     black.B2laeufer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B1pferd':
+                elif  self.choice == 'B1pferd':
                     black.B1pferd.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B2pferd':
+                elif  self.choice == 'B2pferd':
                     black.B2pferd.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B1turm':
+                elif  self.choice == 'B1turm':
                     black.B1turm.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == 'B2turm':
+                elif  self.choice == 'B2turm':
                     black.B2turm.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B1bauer.__getattribute__(self, 'name_BB1'):
+                elif  self.choice == black.B1bauer.__getattribute__(self, 'name_BB1'):
                     black.B1bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B2bauer.__getattribute__(self, 'name_BB2'):
+                elif  self.choice == black.B2bauer.__getattribute__(self, 'name_BB2'):
                     black.B2bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B3bauer.__getattribute__(self, 'name_BB3'):
+                elif  self.choice == black.B3bauer.__getattribute__(self, 'name_BB3'):
                     black.B3bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B4bauer.__getattribute__(self, 'name_BB4'):
+                elif  self.choice == black.B4bauer.__getattribute__(self, 'name_BB4'):
                     black.B4bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B5bauer.__getattribute__(self, 'name_BB5'):
+                elif  self.choice == black.B5bauer.__getattribute__(self, 'name_BB5'):
                     black.B5bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B6bauer.__getattribute__(self, 'name_BB6'):
+                elif  self.choice == black.B6bauer.__getattribute__(self, 'name_BB6'):
                     black.B6bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B7bauer.__getattribute__(self, 'name_BB7'):
+                elif  self.choice == black.B7bauer.__getattribute__(self, 'name_BB7'):
                     black.B7bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif  choice == black.B8bauer.__getattribute__(self, 'name_BB8'):
+                elif  self.choice == black.B8bauer.__getattribute__(self, 'name_BB8'):
                     black.B8bauer.move(self)
                     b.Board.showDataofBoard(self)
-                    self.visualize(b.Board.__getattribute__(self, 'board'))
                     counter += 1
-                elif choice == 'Rochade':
+                elif self.choice == 'Rochade':
                     print('Which Rochade? Left or Right? (Perspective from top onto the field)')
                     Rochade_choice = str(input())
                     if Rochade_choice == 'Left':
@@ -473,7 +465,6 @@ class Engine(white.W1koenig):
                             b.Board.changeAfield(self, 'H', 3, 'B1koenig')
                             b.Board.changeAfield(self, 'H', 4, 'B1turm')
                             b.Board.showDataofBoard(self)
-                            self.visualize(b.Board.__getattribute__(self, 'board'))
                             counter += 1
                         else:
                             print('Move is not allowed!')
@@ -492,7 +483,6 @@ class Engine(white.W1koenig):
                             b.Board.changeAfield(self, 'H', 7, 'B1koenig')
                             b.Board.changeAfield(self, 'H', 6, 'B2turm')
                             b.Board.showDataofBoard(self)
-                            self.visualize(b.Board.__getattribute__(self, 'board'))
                             counter += 1
                         else:
                             print('Move is not allowed!')

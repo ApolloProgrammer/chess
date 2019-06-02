@@ -1,5 +1,7 @@
 #Developer: Marvin Fuchs, May 2019
 import board as b
+import engine as e
+import gui
 
 class W1koenig(b.Board):
     def __init__(self):
@@ -10,8 +12,11 @@ class W1koenig(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE KING!')
-                destination_x_WK = str(input())
-                destination_y_WK = int(input())
+                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                destination_x_WK = destination[0]
+                destination_y_WK = destination[1]
 
                 if b.Board.giveStatusofField(self,destination_x_WK,destination_y_WK)[0]!='W':
                     print('Current position is: '+self.position_x_WK+' '+str(self.position_y_WK))
@@ -45,8 +50,11 @@ class W1dame(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                destination_x_WD = str(input())
-                destination_y_WD = int(input())
+                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                destination_x_WD = destination[0]
+                destination_y_WD = destination[1]
 
                 if b.Board.giveStatusofField(self,destination_x_WD,destination_y_WD)[0]!='W':
                     print('Current position is: '+self.position_x_WD+' '+str(self.position_y_WD))
@@ -110,8 +118,11 @@ class W1laeufer(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 LAUFER!')
-                destination_x_WL1 = str(input())
-                destination_y_WL1 = int(input())
+                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                destination_x_WL1 = destination[0]
+                destination_y_WL1 = destination[1]
 
                 if b.Board.giveStatusofField(self,destination_x_WL1,destination_y_WL1)[0]!='W':
                     print('Current position is: '+self.position_x_WL1+' '+str(self.position_y_WL1))
@@ -155,8 +166,11 @@ class W2laeufer(b.Board):
     def move(self):
         while True:
             print('Give a x (letter) and y (number) coordinate for WHITE2 LAUFER!')
-            destination_x_WL2 = str(input())
-            destination_y_WL2 = int(input())
+            e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+            destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+            destination_x_WL2 = destination[0]
+            destination_y_WL2 = destination[1]
 
             if b.Board.giveStatusofField(self, destination_x_WL2, destination_y_WL2)[0] != 'W':
                 print('Current position is: ' + self.position_x_WL2 + ' ' + str(self.position_y_WL2))
@@ -200,8 +214,11 @@ class W1pferd(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 PFERD!')
-                destination_x_WP1 = str(input())
-                destination_y_WP1 = int(input())
+                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                destination_x_WP1 = destination[0]
+                destination_y_WP1 = destination[1]
 
                 if b.Board.giveStatusofField(self,destination_x_WP1,destination_y_WP1)[0]!='W':
                     print('Current position is: '+self.position_x_WP1+' '+str(self.position_y_WP1))
@@ -239,8 +256,11 @@ class W2pferd(b.Board):
     def move(self):
         while True:
             print('Give a x (letter) and y (number) coordinate for WHITE2 PFERD!')
-            destination_x_WP2 = str(input())
-            destination_y_WP2 = int(input())
+            e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+            destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+            destination_x_WP2 = destination[0]
+            destination_y_WP2 = destination[1]
 
             if b.Board.giveStatusofField(self, destination_x_WP2, destination_y_WP2)[0] != 'W':
                 print('Current position is: ' + self.position_x_WP2 + ' ' + str(self.position_y_WP2))
@@ -278,9 +298,11 @@ class W1turm(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                destination_x_WT1 = str(input())
-                destination_y_WT1 = int(input())
+                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                destination = e.Engine.__getattribute__(self, 'destination_choice')
 
+                destination_x_WT1 = destination[0]
+                destination_y_WT1 = destination[1]
                 if b.Board.giveStatusofField(self, destination_x_WT1, destination_y_WT1)[0] != 'W':
                     print('Current position is: ' + self.position_x_WT1 + ' ' + str(self.position_y_WT1))
 
@@ -322,8 +344,11 @@ class W2turm(b.Board):
     def move(self):
         while True:
             print('Give a x (letter) and y (number) coordinate for WHITE2 TURM!')
-            destination_x_WT2 = str(input())
-            destination_y_WT2 = int(input())
+            e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+            destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+            destination_x_WT2 = destination[0]
+            destination_y_WT2 = destination[1]
 
             if b.Board.giveStatusofField(self, destination_x_WT2, destination_y_WT2)[0] != 'W':
                 print('Current position is: ' + self.position_x_WT2 + ' ' + str(self.position_y_WT2))
@@ -364,12 +389,17 @@ class W1bauer(b.Board):
         self.name_WB1='W1bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE1 BAUER!')
-                    destination_x_WB1 = str(input())
-                    destination_y_WB1 = int(input())
+
+                    e.Engine.visualize(self,b.Board.__getattribute__(self, 'board'),1)
+                    destination=e.Engine.__getattribute__(self,'destination_choice')
+
+                    destination_x_WB1 = destination[0]
+                    destination_y_WB1 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB1,destination_y_WB1)[0]!='W':
                         print('Current position is: '+self.position_x_WB1+' '+str(self.position_y_WB1))
 
@@ -432,8 +462,11 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB1 = str(input())
-                        destination_y_WB1 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB1 = destination[0]
+                        destination_y_WB1 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB1, destination_y_WB1)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB1 + ' ' + str(self.position_y_WB1))
@@ -505,8 +538,11 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 LAUFER!')
-                        destination_x_WB1 = str(input())
-                        destination_y_WB1 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB1 = destination[0]
+                        destination_y_WB1 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB1, destination_y_WB1)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB1 + ' ' + str(self.position_y_WB1))
@@ -556,8 +592,11 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 PFERD!')
-                        destination_x_WB1 = str(input())
-                        destination_y_WB1 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB1 = destination[0]
+                        destination_y_WB1 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB1, destination_y_WB1)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB1 + ' ' + str(self.position_y_WB1))
@@ -600,8 +639,11 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        destination_x_WB1 = str(input())
-                        destination_y_WB1 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB1 = destination[0]
+                        destination_y_WB1 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB1, destination_y_WB1)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB1 + ' ' + str(self.position_y_WB1))
@@ -648,8 +690,11 @@ class W2bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE2 BAUER!')
-                    destination_x_WB2 = str(input())
-                    destination_y_WB2 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB2 = destination[0]
+                    destination_y_WB2 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB2,destination_y_WB2)[0]!='W':
                         print('Current position is: '+self.position_x_WB2+' '+str(self.position_y_WB2))
 
@@ -712,8 +757,11 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB2 = str(input())
-                        destination_y_WB2 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB2 = destination[0]
+                        destination_y_WB2 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB2, destination_y_WB2)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB2 + ' ' + str(self.position_y_WB2))
@@ -785,8 +833,11 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB2 = str(input())
-                        destination_y_WB2 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB2 = destination[0]
+                        destination_y_WB2 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB2, destination_y_WB2)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB2 + ' ' + str(self.position_y_WB2))
@@ -836,8 +887,11 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB2 = str(input())
-                        destination_y_WB2 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB2 = destination[0]
+                        destination_y_WB2 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB2, destination_y_WB2)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB2 + ' ' + str(self.position_y_WB2))
@@ -880,8 +934,11 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE TURM!')
-                        destination_x_WB2 = str(input())
-                        destination_y_WB2 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB2 = destination[0]
+                        destination_y_WB2 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB2, destination_y_WB2)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB2 + ' ' + str(self.position_y_WB2))
@@ -928,8 +985,11 @@ class W3bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE3 BAUER!')
-                    destination_x_WB3 = str(input())
-                    destination_y_WB3 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB3 = destination[0]
+                    destination_y_WB3 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB3,destination_y_WB3)[0]!='W':
                         print('Current position is: '+self.position_x_WB3+' '+str(self.position_y_WB3))
 
@@ -992,8 +1052,11 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB3 = str(input())
-                        destination_y_WB3 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB3 = destination[0]
+                        destination_y_WB3 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB3, destination_y_WB3)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB3 + ' ' + str(self.position_y_WB3))
@@ -1065,8 +1128,11 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB3 = str(input())
-                        destination_y_WB3 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB3 = destination[0]
+                        destination_y_WB3 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB3, destination_y_WB3)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB3 + ' ' + str(self.position_y_WB3))
@@ -1116,8 +1182,11 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB3 = str(input())
-                        destination_y_WB3 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB3 = destination[0]
+                        destination_y_WB3 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB3, destination_y_WB3)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB3 + ' ' + str(self.position_y_WB3))
@@ -1160,8 +1229,11 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE TURM!')
-                        destination_x_WB3 = str(input())
-                        destination_y_WB3 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB3 = destination[0]
+                        destination_y_WB3 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB3, destination_y_WB3)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB3 + ' ' + str(self.position_y_WB3))
@@ -1208,8 +1280,11 @@ class W4bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE4 BAUER!')
-                    destination_x_WB4 = str(input())
-                    destination_y_WB4 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB4 = destination[0]
+                    destination_y_WB4 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB4,destination_y_WB4)[0]!='W':
                         print('Current position is: '+self.position_x_WB4+' '+str(self.position_y_WB4))
 
@@ -1272,8 +1347,11 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB4 = str(input())
-                        destination_y_WB4 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB4 = destination[0]
+                        destination_y_WB4 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB4, destination_y_WB4)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB4 + ' ' + str(self.position_y_WB4))
@@ -1345,8 +1423,11 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB4 = str(input())
-                        destination_y_WB4 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB4 = destination[0]
+                        destination_y_WB4 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB4, destination_y_WB4)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB4 + ' ' + str(self.position_y_WB4))
@@ -1396,8 +1477,11 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB4 = str(input())
-                        destination_y_WB4 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB4 = destination[0]
+                        destination_y_WB4 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB4, destination_y_WB4)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB4 + ' ' + str(self.position_y_WB4))
@@ -1440,8 +1524,11 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        destination_x_WB4 = str(input())
-                        destination_y_WB4 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB4 = destination[0]
+                        destination_y_WB4 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB4, destination_y_WB4)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB4 + ' ' + str(self.position_y_WB4))
@@ -1488,8 +1575,11 @@ class W5bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE5 BAUER!')
-                    destination_x_WB5 = str(input())
-                    destination_y_WB5 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB5 = destination[0]
+                    destination_y_WB5 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB5,destination_y_WB5)[0]!='W':
                         print('Current position is: '+self.position_x_WB5+' '+str(self.position_y_WB5))
 
@@ -1552,8 +1642,11 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB5 = str(input())
-                        destination_y_WB5 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB5 = destination[0]
+                        destination_y_WB5 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB5, destination_y_WB5)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB5 + ' ' + str(self.position_y_WB5))
@@ -1625,8 +1718,11 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB5 = str(input())
-                        destination_y_WB5 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB5 = destination[0]
+                        destination_y_WB5 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB5, destination_y_WB5)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB5 + ' ' + str(self.position_y_WB5))
@@ -1676,8 +1772,11 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB5 = str(input())
-                        destination_y_WB5 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB5 = destination[0]
+                        destination_y_WB5 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB5, destination_y_WB5)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB5 + ' ' + str(self.position_y_WB5))
@@ -1720,8 +1819,11 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        destination_x_WB5 = str(input())
-                        destination_y_WB5 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB5 = destination[0]
+                        destination_y_WB5 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB5, destination_y_WB5)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB5 + ' ' + str(self.position_y_WB5))
@@ -1768,8 +1870,11 @@ class W6bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE6 BAUER!')
-                    destination_x_WB6 = str(input())
-                    destination_y_WB6 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB6 = destination[0]
+                    destination_y_WB6 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB6,destination_y_WB6)[0]!='W':
                         print('Current position is: '+self.position_x_WB6+' '+str(self.position_y_WB6))
 
@@ -1832,8 +1937,11 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB6 = str(input())
-                        destination_y_WB6 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB6 = destination[0]
+                        destination_y_WB6 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB6, destination_y_WB6)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB6 + ' ' + str(self.position_y_WB6))
@@ -1905,8 +2013,11 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB6 = str(input())
-                        destination_y_WB6 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB6 = destination[0]
+                        destination_y_WB6 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB6, destination_y_WB6)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB6 + ' ' + str(self.position_y_WB6))
@@ -1956,8 +2067,11 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB6 = str(input())
-                        destination_y_WB6 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB6 = destination[0]
+                        destination_y_WB6 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB6, destination_y_WB6)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB6 + ' ' + str(self.position_y_WB6))
@@ -2000,8 +2114,11 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        destination_x_WB6 = str(input())
-                        destination_y_WB6 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB6 = destination[0]
+                        destination_y_WB6 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB6, destination_y_WB6)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB6 + ' ' + str(self.position_y_WB6))
@@ -2048,8 +2165,11 @@ class W7bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE7 BAUER!')
-                    destination_x_WB7 = str(input())
-                    destination_y_WB7 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB7 = destination[0]
+                    destination_y_WB7 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB7,destination_y_WB7)[0]!='W':
                         print('Current position is: '+self.position_x_WB7+' '+str(self.position_y_WB7))
 
@@ -2112,8 +2232,11 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB7 = str(input())
-                        destination_y_WB7 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB7 = destination[0]
+                        destination_y_WB7 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB7, destination_y_WB7)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB7 + ' ' + str(self.position_y_WB7))
@@ -2185,8 +2308,11 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB7 = str(input())
-                        destination_y_WB7 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB7 = destination[0]
+                        destination_y_WB7 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB7, destination_y_WB7)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB7 + ' ' + str(self.position_y_WB7))
@@ -2236,8 +2362,11 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB7 = str(input())
-                        destination_y_WB7 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB7 = destination[0]
+                        destination_y_WB7 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB7, destination_y_WB7)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB7 + ' ' + str(self.position_y_WB7))
@@ -2280,8 +2409,11 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        destination_x_WB7 = str(input())
-                        destination_y_WB7 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB7 = destination[0]
+                        destination_y_WB7 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB7, destination_y_WB7)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB7 + ' ' + str(self.position_y_WB7))
@@ -2328,8 +2460,11 @@ class W8bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE8 BAUER!')
-                    destination_x_WB8 = str(input())
-                    destination_y_WB8 = int(input())
+                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                    destination_x_WB8 = destination[0]
+                    destination_y_WB8 = destination[1]
                     if b.Board.giveStatusofField(self,destination_x_WB8,destination_y_WB8)[0]!='W':
                         print('Current position is: '+self.position_x_WB8+' '+str(self.position_y_WB8))
 
@@ -2392,8 +2527,11 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        destination_x_WB8 = str(input())
-                        destination_y_WB8 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB8 = destination[0]
+                        destination_y_WB8 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB8, destination_y_WB8)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB8 + ' ' + str(self.position_y_WB8))
@@ -2465,8 +2603,11 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        destination_x_WB8 = str(input())
-                        destination_y_WB8 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB8 = destination[0]
+                        destination_y_WB8 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB8, destination_y_WB8)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB8 + ' ' + str(self.position_y_WB8))
@@ -2516,8 +2657,11 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        destination_x_WB8 = str(input())
-                        destination_y_WB8 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB8 = destination[0]
+                        destination_y_WB8 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB8, destination_y_WB8)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB8 + ' ' + str(self.position_y_WB8))
@@ -2560,8 +2704,11 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        destination_x_WB8 = str(input())
-                        destination_y_WB8 = int(input())
+                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        destination = e.Engine.__getattribute__(self, 'destination_choice')
+
+                        destination_x_WB8 = destination[0]
+                        destination_y_WB8 = destination[1]
 
                         if b.Board.giveStatusofField(self, destination_x_WB8, destination_y_WB8)[0] != 'W':
                             print('Current position is: ' + self.position_x_WB8 + ' ' + str(self.position_y_WB8))
