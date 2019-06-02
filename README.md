@@ -17,3 +17,10 @@ EDIT: The chess game can be played with the GUI. To accept a move consisting of 
       which figure to choose or question which destination to choose) will appear. Still the transformation from 
       a console chess game to a GUI oriented chess is in progress. But everything seems to work out, even when its
       quick and dirty sometimes.
+      
+HOW DO I SET IT UP?
+      Just execute the game.py file with python3. A console and a GUI are going to appear.
+      
+If you can report any bugs, please let me know.
+
+HAVE FUN!
