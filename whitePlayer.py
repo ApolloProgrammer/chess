@@ -1,7 +1,6 @@
 #Developer: Marvin Fuchs, May 2019
 import board as b
 import engine as e
-import gui
 
 class W1koenig(b.Board):
     def __init__(self):
@@ -12,7 +11,6 @@ class W1koenig(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE KING!')
-                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                 destination_x_WK = destination[0]
@@ -50,7 +48,6 @@ class W1dame(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                 destination_x_WD = destination[0]
@@ -118,7 +115,6 @@ class W1laeufer(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 LAUFER!')
-                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                 destination_x_WL1 = destination[0]
@@ -166,7 +162,6 @@ class W2laeufer(b.Board):
     def move(self):
         while True:
             print('Give a x (letter) and y (number) coordinate for WHITE2 LAUFER!')
-            e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
             destination = e.Engine.__getattribute__(self, 'destination_choice')
 
             destination_x_WL2 = destination[0]
@@ -214,7 +209,6 @@ class W1pferd(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 PFERD!')
-                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                 destination_x_WP1 = destination[0]
@@ -256,7 +250,7 @@ class W2pferd(b.Board):
     def move(self):
         while True:
             print('Give a x (letter) and y (number) coordinate for WHITE2 PFERD!')
-            e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+            
             destination = e.Engine.__getattribute__(self, 'destination_choice')
 
             destination_x_WP2 = destination[0]
@@ -298,7 +292,7 @@ class W1turm(b.Board):
     def move(self):
         while True:
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                 destination_x_WT1 = destination[0]
@@ -344,7 +338,7 @@ class W2turm(b.Board):
     def move(self):
         while True:
             print('Give a x (letter) and y (number) coordinate for WHITE2 TURM!')
-            e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+            
             destination = e.Engine.__getattribute__(self, 'destination_choice')
 
             destination_x_WT2 = destination[0]
@@ -395,11 +389,11 @@ class W1bauer(b.Board):
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE1 BAUER!')
 
-                    e.Engine.visualize(self,b.Board.__getattribute__(self, 'board'),1)
                     destination=e.Engine.__getattribute__(self,'destination_choice')
 
                     destination_x_WB1 = destination[0]
                     destination_y_WB1 = destination[1]
+
                     if b.Board.giveStatusofField(self,destination_x_WB1,destination_y_WB1)[0]!='W':
                         print('Current position is: '+self.position_x_WB1+' '+str(self.position_y_WB1))
 
@@ -462,7 +456,7 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB1 = destination[0]
@@ -538,7 +532,7 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB1 = destination[0]
@@ -592,7 +586,7 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB1 = destination[0]
@@ -639,7 +633,7 @@ class W1bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB1 = destination[0]
@@ -690,7 +684,7 @@ class W2bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE2 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB2 = destination[0]
@@ -757,7 +751,7 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB2 = destination[0]
@@ -833,7 +827,7 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB2 = destination[0]
@@ -887,7 +881,7 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB2 = destination[0]
@@ -934,7 +928,7 @@ class W2bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB2 = destination[0]
@@ -985,7 +979,7 @@ class W3bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE3 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB3 = destination[0]
@@ -1052,7 +1046,7 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB3 = destination[0]
@@ -1128,7 +1122,7 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB3 = destination[0]
@@ -1182,7 +1176,7 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB3 = destination[0]
@@ -1229,7 +1223,7 @@ class W3bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB3 = destination[0]
@@ -1280,7 +1274,7 @@ class W4bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE4 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB4 = destination[0]
@@ -1347,7 +1341,7 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB4 = destination[0]
@@ -1423,7 +1417,7 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB4 = destination[0]
@@ -1477,7 +1471,7 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB4 = destination[0]
@@ -1524,7 +1518,7 @@ class W4bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB4 = destination[0]
@@ -1575,7 +1569,7 @@ class W5bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE5 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB5 = destination[0]
@@ -1642,7 +1636,7 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB5 = destination[0]
@@ -1718,7 +1712,7 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB5 = destination[0]
@@ -1772,7 +1766,7 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB5 = destination[0]
@@ -1819,7 +1813,7 @@ class W5bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB5 = destination[0]
@@ -1870,7 +1864,6 @@ class W6bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE6 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB6 = destination[0]
@@ -1937,7 +1930,7 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB6 = destination[0]
@@ -2013,7 +2006,7 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB6 = destination[0]
@@ -2067,7 +2060,7 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB6 = destination[0]
@@ -2114,7 +2107,7 @@ class W6bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB6 = destination[0]
@@ -2165,7 +2158,7 @@ class W7bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE7 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB7 = destination[0]
@@ -2232,7 +2225,7 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB7 = destination[0]
@@ -2308,7 +2301,7 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB7 = destination[0]
@@ -2362,7 +2355,7 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB7 = destination[0]
@@ -2409,7 +2402,7 @@ class W7bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB7 = destination[0]
@@ -2460,7 +2453,7 @@ class W8bauer(b.Board):
         while True:
                 if self.mode=='Bauer':
                     print('Give a x (letter) and y (number) coordinate for WHITE8 BAUER!')
-                    e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                    
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                     destination_x_WB8 = destination[0]
@@ -2527,7 +2520,7 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE DAME!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB8 = destination[0]
@@ -2603,7 +2596,7 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE LAUFER!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB8 = destination[0]
@@ -2657,7 +2650,7 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE PFERD!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB8 = destination[0]
@@ -2704,7 +2697,7 @@ class W8bauer(b.Board):
 
                     if self.n==1:
                         print('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
-                        e.Engine.visualize(self, b.Board.__getattribute__(self, 'board'), 1)
+                        
                         destination = e.Engine.__getattribute__(self, 'destination_choice')
 
                         destination_x_WB8 = destination[0]

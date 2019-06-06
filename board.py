@@ -48,6 +48,10 @@ class Board:
 
         return self.board
 
+    def giveBoard(self):
+        return self.board
+
+
     def showDataofBoard(self): #1 8   9 16   17 25   26 32   33 39   40 46  47 55  56 64 in reverse
         for i in range(7,-1,-1):
             zeile=[]
