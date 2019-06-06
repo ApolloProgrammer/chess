@@ -21,7 +21,9 @@ EDIT2: The chess game can be played with the GUI. To accept a move consisting of
 EDIT3: The multithreading works out! 
        After hitting the start button player one can select with a mouse click TWICE
        on the specific white figure which figure to move. After that player one needs to click TWICE on the destination field.
-       Clicking twice is used to prevent irrational input.
+       Clicking twice is used to prevent irrational input. Also please dont't click to fast ans wait a few seconds between
+       the entering and submit click for choosing your figure and chossing the destination of that figure.
+       I'm trying to fix these input issues. Be calm and it will work out.
        The field gets automaticially visually updated. Now its the turn of Player black and the cycle continues.
       
 HOW DO I SET IT UP?
