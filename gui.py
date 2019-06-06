@@ -5,6 +5,8 @@ from tkinter import ttk
 import threading
 import queue
 import time
+import sys
+import os
 import engine as e
 import board as b
 
@@ -341,11 +343,15 @@ class Visual(Frame):
         self.canvas = Canvas(self)
         self.physical_brett=self.draw_Board()#setup the board. physical_brett is the list with information about the location in pixel of every single field of the physical (GUI) board
         self.showtheUpdate(self.physical_brett, b.Board.createBoard(self), 0)
-
         self.button1 = Button(self.canvas, text="Start", command=self.spawnthread)
-        self.button1.pack(padx=10, pady=10)
-
+        self.button1.grid(column=0,row=0)
+        self.button2 = Button(self.canvas, text="Restart", command=self.restart)
+        self.button2.grid(column=1, row=0)
+        copyright_symbol = u"\u00A9"
+        label = Label(self.canvas,text=copyright_symbol+" Marvin Fuchs, 2019",fg = "black",font = "Helvetica 10").place(x=288,y=383)
         self.canvas.pack(fill=BOTH, expand=1) #end drawing
+
+
 
     ###threading functions start
     def spawnthread(self):
@@ -355,46 +361,63 @@ class Visual(Frame):
         self.update()
 
     def update(self):
-        def locate0(event):
+        def safe_decision_locate0(event):
             x, y = event.x, event.y
-            self.chooseInhabitantofField(x,y,self.physical_brett,self.marker_counter)
+            self.chooseInhabitantofField(x, y, self.physical_brett, self.marker_counter, 0)
             self.marker_counter=1
+            self.canvas.bind("<Button-1>", locate0)
+        def locate0(event):
+            self.canvas.unbind("<Button 1>")
+            x, y = event.x, event.y
+            self.chooseInhabitantofField(x,y,self.physical_brett,self.marker_counter,1)
+            self.marker_counter=1
+            self.canvas.bind("<Button-1>", safe_decision_locate1)
+
+        def safe_decision_locate1(event):
+            x, y = event.x, event.y
+            meta = self.queue.get()
+            self.queue.put([meta[0]])
+            self.chooseField(x, y, self.physical_brett, self.marker_counter, meta[0],0)
+            self.marker_counter = 1
+            self.canvas.bind("<Button-1>", locate1)
         def locate1(event):
             x, y = event.x, event.y
             meta = self.queue.get()
             self.queue.put([meta[0]])
-            self.chooseField(x,y,self.physical_brett,self.marker_counter,meta[0])
-            print(self.queue.qsize())
+            self.chooseField(x,y,self.physical_brett,self.marker_counter,meta[0],1)
             self.marker_counter=1
-        self.canvas.bind("<Button-1>", locate0)
-        self.canvas.bind("<Button-2>", locate1)
-        self.button2 = Button(self.canvas, text="Submit",command=lambda:self.showtheUpdate(self.physical_brett, self.queue.get()[0],1))
+            self.showtheUpdate(self.physical_brett, self.queue.get()[0], 1)
+            self.canvas.bind("<Button-1>", safe_decision_locate0)
 
-        self.button2.pack()
+        self.canvas.bind("<Button-1>", safe_decision_locate0)
 
     ###threading functions end
-
+    def restart(self):
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
 
     ###gui functions begin
 
-    def chooseField(self,x,y,physical_brett,counter,meta): #only the coordinates f.i. D3 get selected
+    def chooseField(self,x,y,physical_brett,counter,meta,case): #only the coordinates f.i. D3 get selected
         for element in physical_brett:
             if (x <= element[1] + self.size * 1 / 2 and x >= element[1] - self.size * 1 / 2) and (
                     y <= element[2] + self.size * 1 / 2 and y >= element[2] - self.size * 1 / 2):
                 n=element[0]
                 break
-        self.destination_choice=[meta[n][0],meta[n][1]]
-        self.queue_destination.put(self.destination_choice)
+        if case==1:
+            self.destination_choice=[meta[n][0],meta[n][1]]
+            self.queue_destination.put(self.destination_choice)
         self.markaField(n,x,y,physical_brett,counter,'yellow')
 
-    def chooseInhabitantofField(self,x,y,physical_brett,counter): #only the number(f.i. field 10 (indirectly W3bauer)) of the field gets selected
+    def chooseInhabitantofField(self,x,y,physical_brett,counter,case): #only the number(f.i. field 10 (indirectly W3bauer)) of the field gets selected
         for element in physical_brett:
             if (x <= element[1] + self.size * 1 / 2 and x >= element[1] - self.size * 1 / 2) and (
                     y <= element[2] + self.size * 1 / 2 and y >= element[2] - self.size * 1 / 2):
                 n=element[0]
                 break
         self.player_choice=n
-        self.queue_choice.put(self.player_choice)
+        if case==1:
+            self.queue_choice.put(self.player_choice)
         self.markaField(n,x,y,physical_brett,counter,'blue')
 
     def markaField(self,n,x,y,physical_brett,counter,color):
@@ -405,7 +428,6 @@ class Visual(Frame):
             self.marker = self.canvas.create_rectangle(physical_brett[n][1]-self.size*1/2, physical_brett[n][2]-self.size*1/2, physical_brett[n][1] + self.size*1/2, physical_brett[n][2] + self.size*1/2, outline=color, width=3) #  PROJECT MARKING A FIELD THAT IS INHABITED
 
     def givePixelLocation(self, player, sol, meta): #looks for the current location of a figure and returns its coordinates
-        # physical_brett = b.Board.createBoard(self)
         physical_brett = meta
         life=True
         n = 0
@@ -484,9 +506,6 @@ class Visual(Frame):
 
     #Visualizing and Updating, conquering the chessboard by figures of both players
     def showtheUpdate(self,sol,meta,case): #sol is the list with information about the location in pixel of every single field of the physical (GUI) board
-        print(meta)
-        print('BEFORE VISUALIZING')
-        print(self.queue.qsize())
         if case==0:
 
             #white
@@ -623,12 +642,11 @@ class Visual(Frame):
             Visual_B6Bauer.move(self, coordinates_B6bauer[0], coordinates_B6bauer[1], self.size * 1 / 2)
             Visual_B7Bauer.move(self, coordinates_B7bauer[0], coordinates_B7bauer[1], self.size * 1 / 2)
             Visual_B8Bauer.move(self, coordinates_B8bauer[0], coordinates_B8bauer[1], self.size * 1 / 2)
-        print('AFTER VISUALIZING')
-        print(self.queue.qsize())
 def main():
     root = Tk()
     root.geometry("400x400")
     board = Visual()
+    root.resizable(width=False, height=False)
     root.mainloop()
 
 if __name__== "__main__":
