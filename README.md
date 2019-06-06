@@ -10,13 +10,17 @@ I hope you enjoy my work.
 
 Edit: LOGIC COMPLETED!
 
-EDIT: Im starting the transformation of the console chess game to a minimalistic GUI.
+EDIT1: Im starting the transformation of the console chess game to a minimalistic GUI.
 
-EDIT: The chess game can be played with the GUI. To accept a move consisting of choosing the figure and choosing
+EDIT2: The chess game can be played with the GUI. To accept a move consisting of choosing the figure and choosing
       its destination, one has to close the GUI window. A new window with the next step (either question 
       which figure to choose or question which destination to choose) will appear. Still the transformation from 
       a console chess game to a GUI oriented chess is in progress. But everything seems to work out, even when its
       quick and dirty sometimes.
+  
+EDIT3: The multithreading works out! After hitting the start button player one can select with a left mouse click
+       on the specific white figure which figure to move. After that player one needs to right click on the destination field.
+       By hitting the submit the field gets visually update. Now its the turn of Player black and the cycle continues.
       
 HOW DO I SET IT UP?
       Just execute the game.py file with python3. A console and a GUI are going to appear.
