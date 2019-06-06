@@ -18,9 +18,11 @@ EDIT2: The chess game can be played with the GUI. To accept a move consisting of
       a console chess game to a GUI oriented chess is in progress. But everything seems to work out, even when its
       quick and dirty sometimes.
   
-EDIT3: The multithreading works out! After hitting the start button player one can select with a left mouse click
-       on the specific white figure which figure to move. After that player one needs to right click on the destination field.
-       By hitting the submit the field gets visually update. Now its the turn of Player black and the cycle continues.
+EDIT3: The multithreading works out! 
+       After hitting the start button player one can select with a mouse click TWICE
+       on the specific white figure which figure to move. After that player one needs to click TWICE on the destination field.
+       Clicking twice is used to prevent irrational input.
+       The field gets automaticially visually updated. Now its the turn of Player black and the cycle continues.
       
 HOW DO I SET IT UP?
       Just execute the game.py file with python3. A console and a GUI are going to appear.
