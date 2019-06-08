@@ -12,11 +12,12 @@ import board as b
 
 ##threading class start
 class ThreadedClient(threading.Thread):
-    def __init__(self, queue, queue_choice,queue_destination):
+    def __init__(self, queue, queue_choice,queue_destination,queue_wrongChoice):
         threading.Thread.__init__(self)
         self.queue = queue
         self.queue_choice = queue_choice
         self.queue_destination = queue_destination
+        self.queue_wrongChoice = queue_wrongChoice
         self.meta=[]
     def run(self):
         game=e.Engine()
@@ -24,12 +25,21 @@ class ThreadedClient(threading.Thread):
 
 
         while game.end == False:
+            # turn of Player1(white)
             if game.counter % 2 == 0:
                 print("Its the turn of Player 1! (White)")
-                print('Please write what figure you choose to move: W1koenig, W1dame, ..., W8bauer, Rochade')
-                game.choice = game.giveBoard()[self.queue_choice.get()][2]
+                print('Please choose what figure you choose to move: W1koenig, W1dame, ..., W8bauer, Rochade')
+                status_of_search_for_protagonist=False
+                while status_of_search_for_protagonist==False:
+                    test_choice=game.giveBoard()[self.queue_choice.get()][2]
+                    if test_choice[0]=='W':
+                        status_of_search_for_protagonist=True
+                        game.choice=test_choice
+                    else:
+                        self.queue_wrongChoice.put(1)
+                    time.sleep(0.1)
+                print("Thats your choice: " + str(game.choice))
                 self.queue.put([self.meta])
-                print("Thats your choice: "+str(game.choice))
                 game.destination_choice=self.queue_destination.get()
                 self.meta=game.turn_of_White()
                 self.queue.get()
@@ -37,10 +47,18 @@ class ThreadedClient(threading.Thread):
             # turn of Player2(black)
             else:
                 print("Its the turn of Player 2! (Black)")
-                print('Please write what figure you choose to move: B1koenig, B1dame, ..., B8bauer, Rochade')
-                game.choice = game.giveBoard()[self.queue_choice.get()][2]
-                self.queue.put([self.meta])
+                print('Please choose what figure you choose to move: B1koenig, B1dame, ..., B8bauer, Rochade')
+                status_of_search_for_protagonist = False
+                while status_of_search_for_protagonist == False:
+                    test_choice = game.giveBoard()[self.queue_choice.get()][2]
+                    if test_choice[0] == 'B':
+                        status_of_search_for_protagonist = True
+                        game.choice = test_choice
+                    else:
+                        self.queue_wrongChoice.put(1)
+                    time.sleep(0.1)
                 print("Thats your choice: " + str(game.choice))
+                self.queue.put([self.meta])
                 game.destination_choice=self.queue_destination.get()
                 self.meta=game.turn_of_Black()
                 self.queue.get()
@@ -330,6 +348,7 @@ class Visual(Frame):
         self.queue = queue.Queue()
         self.queue_choice= queue.Queue()
         self.queue_destination = queue.Queue()
+        self.queue_wrongChoice = queue.Queue()
         #gui
         self.factor = 2
         self.size = self.factor * 20
@@ -356,38 +375,63 @@ class Visual(Frame):
     ###threading functions start
     def spawnthread(self):
         self.button1.config(state="disabled")
-        self.thread = ThreadedClient(self.queue,self.queue_choice,self.queue_destination)
+        self.thread = ThreadedClient(self.queue,self.queue_choice,self.queue_destination,self.queue_wrongChoice)
         self.thread.start()
         self.update()
 
     def update(self):
         def safe_decision_locate0(event):
             x, y = event.x, event.y
-            self.chooseInhabitantofField(x, y, self.physical_brett, self.marker_counter, 0)
+            self.n=self.chooseInhabitantofField(x, y, self.physical_brett, self.marker_counter)
+            self.markaField(self.n,x,y,self.physical_brett,self.marker_counter,'blue')
+            self.choice1=self.player_choice
             self.marker_counter=1
             self.canvas.bind("<Button-1>", locate0)
         def locate0(event):
-            self.canvas.unbind("<Button 1>")
             x, y = event.x, event.y
-            self.chooseInhabitantofField(x,y,self.physical_brett,self.marker_counter,1)
-            self.marker_counter=1
-            self.canvas.bind("<Button-1>", safe_decision_locate1)
+            self.n=self.chooseInhabitantofField(x,y,self.physical_brett,self.marker_counter)
+            if self.player_choice==self.choice1:
+                self.markaField(self.n, x, y,self.physical_brett,self.marker_counter, 'green')
+                self.queue_choice.put(self.player_choice)
+                time.sleep(0.001)
+                size = self.queue_wrongChoice.qsize()
+                if size != 0:
+                    self.queue_wrongChoice.get()
+                    self.label1 = Label(self.canvas, text="Choose own player!", fg="black",
+                                   font="Helvetica 10")
+                    self.label1.place(x=30, y=383)
+                    self.canvas.bind("<Button-1>", locate0)
+                else:
+                    self.canvas.bind("<Button-1>", safe_decision_locate1)
+            else:
+                self.markaField(self.n, x, y,self.physical_brett,self.marker_counter, 'blue')
+                self.choice1 = self.player_choice
+                self.canvas.bind("<Button-1>", locate0)
 
         def safe_decision_locate1(event):
+            self.label1.place_forget()
             x, y = event.x, event.y
             meta = self.queue.get()
             self.queue.put([meta[0]])
-            self.chooseField(x, y, self.physical_brett, self.marker_counter, meta[0],0)
-            self.marker_counter = 1
+            self.n2=self.chooseField(x, y, self.physical_brett, self.marker_counter, meta[0])
+            self.markaField(self.n2, x, y, self.physical_brett, self.marker_counter, 'orange')
             self.canvas.bind("<Button-1>", locate1)
         def locate1(event):
             x, y = event.x, event.y
             meta = self.queue.get()
             self.queue.put([meta[0]])
-            self.chooseField(x,y,self.physical_brett,self.marker_counter,meta[0],1)
-            self.marker_counter=1
-            self.showtheUpdate(self.physical_brett, self.queue.get()[0], 1)
-            self.canvas.bind("<Button-1>", safe_decision_locate0)
+            self.n2_new=self.chooseField(x,y,self.physical_brett,self.marker_counter,meta[0])
+            if self.n2_new==self.n2:
+                self.destination_choice=[meta[0][self.n2_new][0],meta[0][self.n2_new][1]]
+                self.queue_destination.put(self.destination_choice)
+                self.markaField(self.n2_new,x,y,self.physical_brett,self.marker_counter,'green')
+                meta=self.queue.get()[0]
+                self.button3 = Button(self.canvas, text="Update", command=lambda:self.showtheUpdate(self.physical_brett, meta, 1)).grid(column=2, row=0)
+                self.canvas.bind("<Button-1>", safe_decision_locate0)
+            else:
+                self.markaField(self.n2_new, x, y, self.physical_brett, self.marker_counter, 'orange')
+                self.n2=self.n2_new
+                self.canvas.bind("<Button-1>", locate1)
 
         self.canvas.bind("<Button-1>", safe_decision_locate0)
 
@@ -398,27 +442,22 @@ class Visual(Frame):
 
     ###gui functions begin
 
-    def chooseField(self,x,y,physical_brett,counter,meta,case): #only the coordinates f.i. D3 get selected
+    def chooseField(self,x,y,physical_brett,counter,meta): #only the coordinates f.i. D3 get selected
         for element in physical_brett:
             if (x <= element[1] + self.size * 1 / 2 and x >= element[1] - self.size * 1 / 2) and (
                     y <= element[2] + self.size * 1 / 2 and y >= element[2] - self.size * 1 / 2):
                 n=element[0]
                 break
-        if case==1:
-            self.destination_choice=[meta[n][0],meta[n][1]]
-            self.queue_destination.put(self.destination_choice)
-        self.markaField(n,x,y,physical_brett,counter,'yellow')
+        return n
 
-    def chooseInhabitantofField(self,x,y,physical_brett,counter,case): #only the number(f.i. field 10 (indirectly W3bauer)) of the field gets selected
+    def chooseInhabitantofField(self,x,y,physical_brett,counter): #only the number(f.i. field 10 (indirectly W3bauer)) of the field gets selected
         for element in physical_brett:
             if (x <= element[1] + self.size * 1 / 2 and x >= element[1] - self.size * 1 / 2) and (
                     y <= element[2] + self.size * 1 / 2 and y >= element[2] - self.size * 1 / 2):
                 n=element[0]
                 break
         self.player_choice=n
-        if case==1:
-            self.queue_choice.put(self.player_choice)
-        self.markaField(n,x,y,physical_brett,counter,'blue')
+        return n
 
     def markaField(self,n,x,y,physical_brett,counter,color):
         if counter==0:
@@ -443,11 +482,13 @@ class Visual(Frame):
         else:
             life=False
             if player[0]=='W':
-                x,y=self.white_dead*self.size*2/3 +self.size, 20
+                #x,y=self.white_dead*self.size*2/3 +self.size, 20
+                x,y=1000,1000 #quick and dirty solution to show that a figure is dead. MAybe later I'm going to implement a RIP
                 self.white_dead+=1
                 return  x,y,life
             else:
-                x, y = self.black_dead * self.size*2/3 + self.size, 380
+                #x, y = self.black_dead * self.size*2/3 + self.size, 380
+                x,y=1000,1000
                 self.black_dead += 1
                 return x,y,life
 
@@ -642,6 +683,7 @@ class Visual(Frame):
             Visual_B6Bauer.move(self, coordinates_B6bauer[0], coordinates_B6bauer[1], self.size * 1 / 2)
             Visual_B7Bauer.move(self, coordinates_B7bauer[0], coordinates_B7bauer[1], self.size * 1 / 2)
             Visual_B8Bauer.move(self, coordinates_B8bauer[0], coordinates_B8bauer[1], self.size * 1 / 2)
+
 def main():
     root = Tk()
     root.geometry("400x400")

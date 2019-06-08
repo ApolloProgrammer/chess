@@ -57,98 +57,82 @@ class Engine(white.W1koenig):
     def turn_of_White(self):
         if self.choice == 'W1koenig':
             white.W1koenig.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self,'board')
         elif self.choice == 'W1dame':
             white.W1dame.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1laeufer':
             white.W1laeufer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W2laeufer':
             white.W2laeufer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1pferd':
             white.W1pferd.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W2pferd':
             white.W2pferd.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1turm':
             white.W1turm.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W2turm':
             white.W2turm.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W1bauer.__getattribute__(self, 'name_WB1'):
             white.W1bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
             return b.Board.__getattribute__(self,'board')
         elif self.choice == white.W2bauer.__getattribute__(self, 'name_WB2'):
             white.W2bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W3bauer.__getattribute__(self, 'name_WB3'):
             white.W3bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W4bauer.__getattribute__(self, 'name_WB4'):
             white.W4bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W5bauer.__getattribute__(self, 'name_WB5'):
             white.W5bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W6bauer.__getattribute__(self, 'name_WB6'):
             white.W6bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W7bauer.__getattribute__(self, 'name_WB7'):
             white.W7bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W8bauer.__getattribute__(self, 'name_WB8'):
             white.W8bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
@@ -375,97 +359,81 @@ class Engine(white.W1koenig):
     def turn_of_Black(self):
         if self.choice == 'B1koenig':
             black.B1koenig.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1dame':
             black.B1dame.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1laeufer':
             black.B1laeufer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B2laeufer':
             black.B2laeufer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1pferd':
             black.B1pferd.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B2pferd':
             black.B2pferd.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1turm':
             black.B1turm.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B2turm':
             black.B2turm.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B1bauer.__getattribute__(self, 'name_BB1'):
             black.B1bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B2bauer.__getattribute__(self, 'name_BB2'):
             black.B2bauer.move(self)
-            self.b.Board.showDataofBoard(self)
-            counter += 1
+            self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B3bauer.__getattribute__(self, 'name_BB3'):
             black.B3bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B4bauer.__getattribute__(self, 'name_BB4'):
             black.B4bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B5bauer.__getattribute__(self, 'name_BB5'):
             black.B5bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B6bauer.__getattribute__(self, 'name_BB6'):
             black.B6bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B7bauer.__getattribute__(self, 'name_BB7'):
             black.B7bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B8bauer.__getattribute__(self, 'name_BB8'):
             black.B8bauer.move(self)
-            b.Board.showDataofBoard(self)
             self.counter += 1
             self.choice = ''
             return b.Board.__getattribute__(self, 'board')
