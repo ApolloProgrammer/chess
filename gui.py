@@ -9,26 +9,29 @@ import sys
 import os
 import engine as e
 import board as b
+import whitePlayer as white
+import blackPlayer as black
 
 ##threading class start
 class ThreadedClient(threading.Thread):
-    def __init__(self, queue, queue_choice,queue_destination,queue_wrongChoice):
+    def __init__(self, queue, queue_choice,queue_destination,queue_wrongChoice,queue_wrongDestination,queue_Board):
         threading.Thread.__init__(self)
         self.queue = queue
         self.queue_choice = queue_choice
         self.queue_destination = queue_destination
         self.queue_wrongChoice = queue_wrongChoice
+        self.queue_wrongDestination = queue_wrongDestination
+        self.queue_Board = queue_Board
+
         self.meta=[]
     def run(self):
         game=e.Engine()
         self.meta = b.Board.createBoard(self)
 
-
         while game.end == False:
             # turn of Player1(white)
             if game.counter % 2 == 0:
-                print("Its the turn of Player 1! (White)")
-                print('Please choose what figure you choose to move: W1koenig, W1dame, ..., W8bauer, Rochade')
+                print("Its the turn of Player 1! (White) Choose you figure!")
                 status_of_search_for_protagonist=False
                 while status_of_search_for_protagonist==False:
                     test_choice=game.giveBoard()[self.queue_choice.get()][2]
@@ -37,17 +40,25 @@ class ThreadedClient(threading.Thread):
                         game.choice=test_choice
                     else:
                         self.queue_wrongChoice.put(1)
-                    time.sleep(0.1)
-                print("Thats your choice: " + str(game.choice))
+                        time.sleep(0.1)
                 self.queue.put([self.meta])
                 game.destination_choice=self.queue_destination.get()
-                self.meta=game.turn_of_White()
-                self.queue.get()
-                self.queue.put([self.meta])
+                status_of_search_for_Destination = False
+                while status_of_search_for_Destination == False:
+                    temp = game.turn_of_White()
+                    if temp==1:
+                        self.queue_wrongDestination.put(1)
+                        newChoice=self.queue_destination.get()
+                        game.destination_choice=newChoice
+                        time.sleep(0.1)
+                    else:
+                        status_of_search_for_Destination=True
+                        self.meta=temp
+                        self.queue.get()
+                        self.queue_Board.put([self.meta])
             # turn of Player2(black)
             else:
-                print("Its the turn of Player 2! (Black)")
-                print('Please choose what figure you choose to move: B1koenig, B1dame, ..., B8bauer, Rochade')
+                print("Its the turn of Player 2! (Black) Choose you figure!")
                 status_of_search_for_protagonist = False
                 while status_of_search_for_protagonist == False:
                     test_choice = game.giveBoard()[self.queue_choice.get()][2]
@@ -57,13 +68,21 @@ class ThreadedClient(threading.Thread):
                     else:
                         self.queue_wrongChoice.put(1)
                     time.sleep(0.1)
-                print("Thats your choice: " + str(game.choice))
                 self.queue.put([self.meta])
-                game.destination_choice=self.queue_destination.get()
-                self.meta=game.turn_of_Black()
-                self.queue.get()
-                self.queue.put([self.meta])
-
+                game.destination_choice = self.queue_destination.get()
+                status_of_search_for_Destination = False
+                while status_of_search_for_Destination == False:
+                    temp = game.turn_of_Black()
+                    if temp == 1:
+                        self.queue_wrongDestination.put(1)
+                        newChoice = self.queue_destination.get()
+                        game.destination_choice = newChoice
+                        time.sleep(0.1)
+                    else:
+                        status_of_search_for_Destination = True
+                        self.meta = temp
+                        self.queue.get()
+                        self.queue_Board.put([self.meta])
 
 ##threading class end
 
@@ -349,6 +368,9 @@ class Visual(Frame):
         self.queue_choice= queue.Queue()
         self.queue_destination = queue.Queue()
         self.queue_wrongChoice = queue.Queue()
+        self.queue_wrongDestination = queue.Queue()
+        self.queue_Board = queue.Queue()
+
         #gui
         self.factor = 2
         self.size = self.factor * 20
@@ -375,11 +397,13 @@ class Visual(Frame):
     ###threading functions start
     def spawnthread(self):
         self.button1.config(state="disabled")
-        self.thread = ThreadedClient(self.queue,self.queue_choice,self.queue_destination,self.queue_wrongChoice)
+        self.thread = ThreadedClient(self.queue,self.queue_choice,self.queue_destination,self.queue_wrongChoice,self.queue_wrongDestination,self.queue_Board)
         self.thread.start()
         self.update()
 
     def update(self):
+        self.m=0
+        self.l=0
         def safe_decision_locate0(event):
             x, y = event.x, event.y
             self.n=self.chooseInhabitantofField(x, y, self.physical_brett, self.marker_counter)
@@ -397,6 +421,7 @@ class Visual(Frame):
                 size = self.queue_wrongChoice.qsize()
                 if size != 0:
                     self.queue_wrongChoice.get()
+                    self.m=1
                     self.label1 = Label(self.canvas, text="Choose own player!", fg="black",
                                    font="Helvetica 10")
                     self.label1.place(x=30, y=383)
@@ -409,7 +434,10 @@ class Visual(Frame):
                 self.canvas.bind("<Button-1>", locate0)
 
         def safe_decision_locate1(event):
-            self.label1.place_forget()
+            if self.m ==1:
+                self.label1.place_forget()
+            if self.l==1:
+                self.label2.place_forget()
             x, y = event.x, event.y
             meta = self.queue.get()
             self.queue.put([meta[0]])
@@ -418,21 +446,32 @@ class Visual(Frame):
             self.canvas.bind("<Button-1>", locate1)
         def locate1(event):
             x, y = event.x, event.y
-            meta = self.queue.get()
-            self.queue.put([meta[0]])
-            self.n2_new=self.chooseField(x,y,self.physical_brett,self.marker_counter,meta[0])
+            self.meta1 = self.queue.get()
+            self.queue.put([self.meta1[0]])
+            self.n2_new=self.chooseField(x,y,self.physical_brett,self.marker_counter,self.meta1[0])
             if self.n2_new==self.n2:
-                self.destination_choice=[meta[0][self.n2_new][0],meta[0][self.n2_new][1]]
+                self.destination_choice=[self.meta1[0][self.n2_new][0],self.meta1[0][self.n2_new][1]]
                 self.queue_destination.put(self.destination_choice)
                 self.markaField(self.n2_new,x,y,self.physical_brett,self.marker_counter,'green')
-                meta=self.queue.get()[0]
-                self.button3 = Button(self.canvas, text="Update", command=lambda:self.showtheUpdate(self.physical_brett, meta, 1)).grid(column=2, row=0)
-                self.canvas.bind("<Button-1>", safe_decision_locate0)
+
+                temp=self.queue_wrongDestination.qsize()
+                if temp!=0:
+                    self.l = 1
+                    self.label2 = Label(self.canvas, text="Choose correct destination!", fg="black",font="Helvetica 10")
+                    self.label2.place(x=30, y=383)
+                    self.queue_wrongDestination.get()
+                    self.canvas.bind("<Button-1>", safe_decision_locate1)
+                else:
+                    print('JAWOHL')
+                    meta = self.queue_Board.get()
+                    print(meta)
+                    self.button3 = Button(self.canvas, text="Update", command=lambda:self.showtheUpdate(self.physical_brett, meta[0], 1)).grid(column=2, row=0)
+                    self.canvas.bind("<Button-1>", safe_decision_locate0)
+
             else:
                 self.markaField(self.n2_new, x, y, self.physical_brett, self.marker_counter, 'orange')
                 self.n2=self.n2_new
                 self.canvas.bind("<Button-1>", locate1)
-
         self.canvas.bind("<Button-1>", safe_decision_locate0)
 
     ###threading functions end

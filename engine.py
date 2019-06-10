@@ -53,88 +53,206 @@ class Engine(white.W1koenig):
         self.check_againstBlack = 0 # if 0, then no check; elif 1, then check; elif 2, then checkMate (end)
         self.check_againstWhite = 0
 
+    def checkDestination(self):
+        WB1_wrongDestination=white.W1bauer.__getattribute__(self,'WB1_wrongDestination')
+        WB2_wrongDestination=white.W2bauer.__getattribute__(self,'WB2_wrongDestination')
+        WB3_wrongDestination=white.W3bauer.__getattribute__(self,'WB3_wrongDestination')
+        WB4_wrongDestination=white.W4bauer.__getattribute__(self,'WB4_wrongDestination')
+        WB5_wrongDestination=white.W5bauer.__getattribute__(self,'WB5_wrongDestination')
+        WB6_wrongDestination=white.W6bauer.__getattribute__(self,'WB6_wrongDestination')
+        WB7_wrongDestination=white.W7bauer.__getattribute__(self,'WB7_wrongDestination')
+        WB8_wrongDestination=white.W8bauer.__getattribute__(self,'WB8_wrongDestination')
+        WK1_wrongDestination=white.W1koenig.__getattribute__(self,'WK1_wrongDestination')
+        WD1_wrongDestination=white.W1dame.__getattribute__(self,'WD1_wrongDestination')
+        WL1_wrongDestination=white.W1laeufer.__getattribute__(self,'WL1_wrongDestination')
+        WL2_wrongDestination=white.W2laeufer.__getattribute__(self,'WL2_wrongDestination')
+        WP1_wrongDestination=white.W1pferd.__getattribute__(self,'WP1_wrongDestination')
+        WP2_wrongDestination=white.W2pferd.__getattribute__(self,'WP2_wrongDestination')
+        WT1_wrongDestination=white.W1turm.__getattribute__(self,'WT1_wrongDestination')
+        WT2_wrongDestination=white.W2turm.__getattribute__(self,'WT2_wrongDestination')
+
+        BB1_wrongDestination = black.B1bauer.__getattribute__(self, 'BB1_wrongDestination')
+        BB2_wrongDestination = black.B2bauer.__getattribute__(self, 'BB2_wrongDestination')
+        BB3_wrongDestination = black.B3bauer.__getattribute__(self, 'BB3_wrongDestination')
+        BB4_wrongDestination = black.B4bauer.__getattribute__(self, 'BB4_wrongDestination')
+        BB5_wrongDestination = black.B5bauer.__getattribute__(self, 'BB5_wrongDestination')
+        BB6_wrongDestination = black.B6bauer.__getattribute__(self, 'BB6_wrongDestination')
+        BB7_wrongDestination = black.B7bauer.__getattribute__(self, 'BB7_wrongDestination')
+        BB8_wrongDestination = black.B8bauer.__getattribute__(self, 'BB8_wrongDestination')
+        BK1_wrongDestination = black.B1koenig.__getattribute__(self, 'BK1_wrongDestination')
+        BD1_wrongDestination = black.B1dame.__getattribute__(self, 'BD1_wrongDestination')
+        BL1_wrongDestination = black.B1laeufer.__getattribute__(self, 'BL1_wrongDestination')
+        BL2_wrongDestination = black.B2laeufer.__getattribute__(self, 'BL2_wrongDestination')
+        BP1_wrongDestination = black.B1pferd.__getattribute__(self, 'BP1_wrongDestination')
+        BP2_wrongDestination = black.B2pferd.__getattribute__(self, 'BP2_wrongDestination')
+        BT1_wrongDestination = black.B1turm.__getattribute__(self, 'BT1_wrongDestination')
+        BT2_wrongDestination = black.B2turm.__getattribute__(self, 'BT2_wrongDestination')
+
+
+        if WK1_wrongDestination or WD1_wrongDestination or WT1_wrongDestination or WT2_wrongDestination or WL1_wrongDestination or WL2_wrongDestination or WP1_wrongDestination or WP2_wrongDestination or WB1_wrongDestination == 1 or WB2_wrongDestination == 1 or WB3_wrongDestination == 1 or WB4_wrongDestination == 1 or WB5_wrongDestination == 1 or WB6_wrongDestination == 1 or WB7_wrongDestination == 1 or WB8_wrongDestination == 1 or BK1_wrongDestination or BD1_wrongDestination or BT1_wrongDestination or BT2_wrongDestination or BL1_wrongDestination or BL2_wrongDestination or BP1_wrongDestination or BP2_wrongDestination or BB1_wrongDestination == 1 or BB2_wrongDestination == 1 or BB3_wrongDestination == 1 or BB4_wrongDestination == 1 or BB5_wrongDestination == 1 or BB6_wrongDestination == 1 or BB7_wrongDestination == 1 or BB8_wrongDestination == 1:
+            white.W1bauer.__setattr__(self, 'WB1_wrongDestination',0)
+            white.W2bauer.__setattr__(self, 'WB2_wrongDestination',0)
+            white.W3bauer.__setattr__(self, 'WB3_wrongDestination',0)
+            white.W4bauer.__setattr__(self, 'WB4_wrongDestination',0)
+            white.W5bauer.__setattr__(self, 'WB5_wrongDestination',0)
+            white.W6bauer.__setattr__(self, 'WB6_wrongDestination',0)
+            white.W7bauer.__setattr__(self, 'WB7_wrongDestination',0)
+            white.W8bauer.__setattr__(self, 'WB8_wrongDestination',0)
+            white.W1koenig.__setattr__(self, 'WK1_wrongDestination',0)
+            white.W1dame.__setattr__(self, 'WD1_wrongDestination',0)
+            white.W1laeufer.__setattr__(self, 'WL1_wrongDestination',0)
+            white.W2laeufer.__setattr__(self, 'WL2_wrongDestination',0)
+            white.W1pferd.__setattr__(self, 'WP1_wrongDestination',0)
+            white.W2pferd.__setattr__(self, 'WP2_wrongDestination',0)
+            white.W1turm.__setattr__(self, 'WT1_wrongDestination',0)
+            white.W2turm.__setattr__(self, 'WT2_wrongDestination',0)
+            black.B1bauer.__setattr__(self, 'BB1_wrongDestination',0)
+            black.B2bauer.__setattr__(self, 'BB2_wrongDestination',0)
+            black.B3bauer.__setattr__(self, 'BB3_wrongDestination',0)
+            black.B4bauer.__setattr__(self, 'BB4_wrongDestination',0)
+            black.B5bauer.__setattr__(self, 'BB5_wrongDestination',0)
+            black.B6bauer.__setattr__(self, 'BB6_wrongDestination',0)
+            black.B7bauer.__setattr__(self, 'BB7_wrongDestination',0)
+            black.B8bauer.__setattr__(self, 'BB8_wrongDestination',0)
+            black.B1koenig.__setattr__(self, 'BK1_wrongDestination',0)
+            black.B1dame.__setattr__(self, 'BD1_wrongDestination',0)
+            black.B1laeufer.__setattr__(self, 'BL1_wrongDestination',0)
+            black.B2laeufer.__setattr__(self, 'BL2_wrongDestination',0)
+            black.B1pferd.__setattr__(self, 'BP1_wrongDestination',0)
+            black.B2pferd.__setattr__(self, 'BP2_wrongDestination',0)
+            black.B1turm.__setattr__(self, 'BT1_wrongDestination',0)
+            black.B2turm.__setattr__(self, 'BT2_wrongDestination',0)
+            return 1
+
 
     def turn_of_White(self):
         if self.choice == 'W1koenig':
             white.W1koenig.move(self)
-            self.counter += 1
-            self.choice = ''
-            return b.Board.__getattribute__(self,'board')
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
+            return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1dame':
             white.W1dame.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1laeufer':
             white.W1laeufer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W2laeufer':
             white.W2laeufer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1pferd':
             white.W1pferd.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W2pferd':
             white.W2pferd.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W1turm':
             white.W1turm.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'W2turm':
             white.W2turm.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W1bauer.__getattribute__(self, 'name_WB1'):
             white.W1bauer.move(self)
-            self.counter += 1
-            self.choice = ''
-            return b.Board.__getattribute__(self, 'board')
+            if self.checkDestination()==1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self,'board')
         elif self.choice == white.W2bauer.__getattribute__(self, 'name_WB2'):
             white.W2bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W3bauer.__getattribute__(self, 'name_WB3'):
             white.W3bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W4bauer.__getattribute__(self, 'name_WB4'):
             white.W4bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W5bauer.__getattribute__(self, 'name_WB5'):
             white.W5bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W6bauer.__getattribute__(self, 'name_WB6'):
             white.W6bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W7bauer.__getattribute__(self, 'name_WB7'):
             white.W7bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == white.W8bauer.__getattribute__(self, 'name_WB8'):
             white.W8bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'Rochade':
             print('Which Rochade? Left or Right?')
@@ -183,8 +301,6 @@ class Engine(white.W1koenig):
                 else:
                     print('Move is not allowed!')
 
-        else:
-            print('please choose again')
 
         # white->black
         # CKECKING WHETHER CHECK OR NOT
@@ -359,83 +475,131 @@ class Engine(white.W1koenig):
     def turn_of_Black(self):
         if self.choice == 'B1koenig':
             black.B1koenig.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1dame':
             black.B1dame.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1laeufer':
             black.B1laeufer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B2laeufer':
             black.B2laeufer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1pferd':
             black.B1pferd.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B2pferd':
             black.B2pferd.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B1turm':
             black.B1turm.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'B2turm':
             black.B2turm.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B1bauer.__getattribute__(self, 'name_BB1'):
             black.B1bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B2bauer.__getattribute__(self, 'name_BB2'):
             black.B2bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B3bauer.__getattribute__(self, 'name_BB3'):
             black.B3bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B4bauer.__getattribute__(self, 'name_BB4'):
             black.B4bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B5bauer.__getattribute__(self, 'name_BB5'):
             black.B5bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B6bauer.__getattribute__(self, 'name_BB6'):
             black.B6bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B7bauer.__getattribute__(self, 'name_BB7'):
             black.B7bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == black.B8bauer.__getattribute__(self, 'name_BB8'):
             black.B8bauer.move(self)
-            self.counter += 1
-            self.choice = ''
+            if self.checkDestination() == 1:
+                return 1
+            else:
+                self.choice = ''
+                self.counter += 1
             return b.Board.__getattribute__(self, 'board')
         elif self.choice == 'Rochade':
             print('Which Rochade? Left or Right? (Perspective from top onto the field)')

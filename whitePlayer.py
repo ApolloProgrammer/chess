@@ -1,6 +1,10 @@
 #Developer: Marvin Fuchs, May 2019
+import threading
+import queue
+import time
 import board as b
 import engine as e
+
 
 class W1koenig(b.Board):
     def __init__(self):
@@ -8,8 +12,11 @@ class W1koenig(b.Board):
         self.position_x_WK = 'A'
         self.position_y_WK = 5
         self.name_WK='W1koenig'
+        self.WK1_wrongDestination=0
+
     def move(self):
         while True:
+                self.WK1_wrongDestination = 0
                 print ('Give a x (letter) and y (number) coordinate for WHITE KING!')
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
@@ -34,10 +41,13 @@ class W1koenig(b.Board):
                         break
 
                     else:
+                        self.WK1_wrongDestination = 1
                         print('Your move is invalid, please choose cooridnates again!')
-                        continue
+                        break
                 else:
+                    self.WK1_wrongDestination = 1
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WK,destination_y_WK))+'.')
+                    break
 
 class W1dame(b.Board):
     def __init__(self):
@@ -45,8 +55,11 @@ class W1dame(b.Board):
         self.position_x_WD = 'A'
         self.position_y_WD = 4
         self.name_WD='W1dame'
+        self.WD1_wrongDestination=0
+
     def move(self):
         while True:
+                self.WD1_wrongDestination = 0
                 print ('Give a x (letter) and y (number) coordinate for WHITE DAME!')
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
@@ -74,6 +87,7 @@ class W1dame(b.Board):
                         break
 
                     else:
+                        self.WD1_wrongDestination = 1
                         print('Your move is invalid, please choose cooridnates again!')
                         print('These are your options:')
                         if controll_Cross == False and controll_Diagonal == False:
@@ -102,9 +116,11 @@ class W1dame(b.Board):
                                 print('Diagonal2')
                                 for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
                                     print(element)
-                        continue
+                        break
                 else:
+                    self.WD1_wrongDestination = 1
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WD,destination_y_WD))+'.')
+                    break
 
 class W1laeufer(b.Board):
     def __init__(self):
@@ -112,8 +128,11 @@ class W1laeufer(b.Board):
         self.position_x_WL1 = 'A'
         self.position_y_WL1 = 3
         self.name_WL1='W1laeufer'
+        self.WL1_wrongDestination=0
+
     def move(self):
         while True:
+                self.WL1_wrongDestination = 0
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 LAUFER!')
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
@@ -140,6 +159,7 @@ class W1laeufer(b.Board):
                         break
 
                     else:
+                        self.WL1_wrongDestination = 1
                         print('Your move is invalid, please choose cooridnates again!')
                         print('These are your options:')
                         print('Diagonal1')
@@ -148,9 +168,11 @@ class W1laeufer(b.Board):
                         print('Diagonal2')
                         for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
                             print(element)
-                        continue
+                        break
                 else:
+                    self.WL1_wrongDestination = 1
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WL1,destination_y_WL1))+'.')
+                    break
 
 class W2laeufer(b.Board):
     def __init__(self):
@@ -158,9 +180,12 @@ class W2laeufer(b.Board):
         self.position_x_WL2 = 'A'
         self.position_y_WL2 = 6
         self.name_WL2 = 'W2laeufer'
+        self.WL2_wrongDestination=0
+
 
     def move(self):
         while True:
+            self.WL2_wrongDestination = 0
             print('Give a x (letter) and y (number) coordinate for WHITE2 LAUFER!')
             destination = e.Engine.__getattribute__(self, 'destination_choice')
 
@@ -187,6 +212,7 @@ class W2laeufer(b.Board):
                     break
 
                 else:
+                    self.WL2_wrongDestination = 1
                     print('Your move is invalid, please choose cooridnates again!')
                     print('These are your options:')
                     print('Diagonal1')
@@ -195,10 +221,12 @@ class W2laeufer(b.Board):
                     print('Diagonal2')
                     for element in b.Board.givepotentialLauferDestination(self, x_pos, y_pos, x_des, y_des)[2]:
                         print(element)
-                    continue
+                    break
             else:
+                self.WL2_wrongDestination = 1
                 print('Does not work! This field is already governed by your ' + (
                     b.Board.giveStatusofField(self, destination_x_WL2, destination_y_WL2)) + '.')
+                break
 
 class W1pferd(b.Board):
     def __init__(self):
@@ -206,8 +234,11 @@ class W1pferd(b.Board):
         self.position_x_WP1 = 'A'
         self.position_y_WP1 = 2
         self.name_WP1='W1pferd'
+        self.WP1_wrongDestination=0
+
     def move(self):
         while True:
+                self.WP1_wrongDestination = 0
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 PFERD!')
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
 
@@ -235,10 +266,13 @@ class W1pferd(b.Board):
                         break
 
                     else:
+                        self.WP1_wrongDestination = 1
                         print('Your move is invalid, please choose cooridnates again!')
-                        continue
+                        break
                 else:
+                    self.WP1_wrongDestination = 1
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WP1,destination_y_WP1))+'.')
+                    break
 
 class W2pferd(b.Board):
     def __init__(self):
@@ -246,9 +280,11 @@ class W2pferd(b.Board):
         self.position_x_WP2 = 'A'
         self.position_y_WP2 = 7
         self.name_WP2= 'W2pferd'
+        self.WP2_wrongDestination = 0
 
     def move(self):
         while True:
+            self.WP2_wrongDestination = 0
             print('Give a x (letter) and y (number) coordinate for WHITE2 PFERD!')
             
             destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -277,11 +313,14 @@ class W2pferd(b.Board):
                     break
 
                 else:
+                    self.WP2_wrongDestination = 1
                     print('Your move is invalid, please choose cooridnates again!')
-                    continue
+                    break
             else:
+                self.WP2_wrongDestination = 1
                 print('Does not work! This field is already governed by your ' + (
                     b.Board.giveStatusofField(self, destination_x_WP2, destination_y_WP2)) + '.')
+                break
 
 class W1turm(b.Board):
     def __init__(self):
@@ -289,8 +328,11 @@ class W1turm(b.Board):
         self.position_x_WT1 = 'A'
         self.position_y_WT1 = 1
         self.name_WT1='W1turm'
+        self.WT1_wrongDestination = 0
+
     def move(self):
         while True:
+                self.WT1_wrongDestination = 0
                 print ('Give a x (letter) and y (number) coordinate for WHITE1 TURM!')
                 
                 destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -319,14 +361,17 @@ class W1turm(b.Board):
                         break
 
                     else:
+                        self.WT1_wrongDestination = 1
                         print('Your move is invalid, please choose cooridnates again!')
                         print('These are your options:')
                         potentialFields = b.Board.givepotentialTurmDestination(self, x_pos, y_pos, x_des, y_des)[1]
                         for element in potentialFields:
                             print(element)
-                        continue
+                        break
                 else:
+                    self.WT1_wrongDestination = 1
                     print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WT1,destination_y_WT1))+'.')
+                    break
 
 class W2turm(b.Board):
     def __init__(self):
@@ -334,9 +379,12 @@ class W2turm(b.Board):
         self.position_x_WT2 = 'A'
         self.position_y_WT2 = 8
         self.name_WT2 = 'W2turm'
+        self.WT2_wrongDestination = 0
+
 
     def move(self):
         while True:
+            self.WT2_wrongDestination = 0
             print('Give a x (letter) and y (number) coordinate for WHITE2 TURM!')
             
             destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -365,15 +413,18 @@ class W2turm(b.Board):
                     break
 
                 else:
+                    self.WT2_wrongDestination = 1
                     print('Your move is invalid, please choose cooridnates again!')
                     print('These are your options:')
                     potentialFields = b.Board.givepotentialTurmDestination(self, x_pos, y_pos, x_des, y_des)[1]
                     for element in potentialFields:
                         print(element)
-                    continue
+                    break
             else:
+                self.WT2_wrongDestination = 1
                 print('Does not work! This field is already governed by your ' + (
                     b.Board.giveStatusofField(self, destination_x_WT2, destination_y_WT2)) + '.')
+                break
 
 class W1bauer(b.Board):
     def __init__(self):
@@ -382,11 +433,13 @@ class W1bauer(b.Board):
         self.position_y_WB1 = 1
         self.name_WB1='W1bauer'
         self.mode='Bauer'
-        self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.n=0 #when changing mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB1_wrongDestination=0
 
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB1_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE1 BAUER!')
 
                     destination=e.Engine.__getattribute__(self,'destination_choice')
@@ -439,10 +492,13 @@ class W1bauer(b.Board):
                                 break
 
                         else:
+                            self.WB1_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB1_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB1,destination_y_WB1))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -680,9 +736,11 @@ class W2bauer(b.Board):
         self.name_WB2='W2bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB2_wrongDestination = 0
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB2_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE2 BAUER!')
                     
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -734,10 +792,13 @@ class W2bauer(b.Board):
                                 break
 
                         else:
+                            self.WB2_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB2_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB2,destination_y_WB2))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -975,9 +1036,12 @@ class W3bauer(b.Board):
         self.name_WB3='W3bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB3_wrongDestination = 0
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB3_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE3 BAUER!')
                     
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -1029,10 +1093,13 @@ class W3bauer(b.Board):
                                 break
 
                         else:
+                            self.WB3_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB3_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB3,destination_y_WB3))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -1270,9 +1337,12 @@ class W4bauer(b.Board):
         self.name_WB4='W4bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB4_wrongDestination = 0
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB4_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE4 BAUER!')
                     
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -1324,10 +1394,13 @@ class W4bauer(b.Board):
                                 break
 
                         else:
+                            self.WB4_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB4_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB4,destination_y_WB4))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -1565,9 +1638,12 @@ class W5bauer(b.Board):
         self.name_WB5='W5bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB5_wrongDestination = 0
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB5_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE5 BAUER!')
                     
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -1619,10 +1695,13 @@ class W5bauer(b.Board):
                                 break
 
                         else:
+                            self.WB5_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB5_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB5,destination_y_WB5))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -1860,9 +1939,12 @@ class W6bauer(b.Board):
         self.name_WB6='W6bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB6_wrongDestination = 0
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB6_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE6 BAUER!')
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
 
@@ -1913,10 +1995,13 @@ class W6bauer(b.Board):
                                 break
 
                         else:
+                            self.WB6_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB6_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB6,destination_y_WB6))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -2154,9 +2239,12 @@ class W7bauer(b.Board):
         self.name_WB7='W7bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB7_wrongDestination = 0
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB7_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE7 BAUER!')
                     
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -2208,10 +2296,13 @@ class W7bauer(b.Board):
                                 break
 
                         else:
+                            self.WB7_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB7_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB7,destination_y_WB7))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
@@ -2449,9 +2540,12 @@ class W8bauer(b.Board):
         self.name_WB8='W8bauer'
         self.mode='Bauer'
         self.n=0 #when chanhging mode, it gives information of the status of changing. n==0,changing to other figure. n==1,already changed, can be used as other figure!
+        self.WB8_wrongDestination = 0
+
     def move(self):
         while True:
                 if self.mode=='Bauer':
+                    self.WB8_wrongDestination = 0
                     print('Give a x (letter) and y (number) coordinate for WHITE8 BAUER!')
                     
                     destination = e.Engine.__getattribute__(self, 'destination_choice')
@@ -2503,10 +2597,13 @@ class W8bauer(b.Board):
                                 break
 
                         else:
+                            self.WB8_wrongDestination = 1
                             print('Your move is invalid, please choose cooridnates again!')
-                            continue
+                            break
                     else:
+                        self.WB8_wrongDestination = 1
                         print('Does not work! This field is already governed by your '+(b.Board.giveStatusofField(self,destination_x_WB8,destination_y_WB8))+'.')
+                        break
 
                 if self.mode == 'Dame':
                     if self.n==0:
