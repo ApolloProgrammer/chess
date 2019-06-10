@@ -432,7 +432,6 @@ class Visual(Frame):
                 self.markaField(self.n, x, y,self.physical_brett,self.marker_counter, 'blue')
                 self.choice1 = self.player_choice
                 self.canvas.bind("<Button-1>", locate0)
-
         def safe_decision_locate1(event):
             if self.m ==1:
                 self.label1.place_forget()
@@ -462,9 +461,7 @@ class Visual(Frame):
                     self.queue_wrongDestination.get()
                     self.canvas.bind("<Button-1>", safe_decision_locate1)
                 else:
-                    print('JAWOHL')
                     meta = self.queue_Board.get()
-                    print(meta)
                     self.button3 = Button(self.canvas, text="Update", command=lambda:self.showtheUpdate(self.physical_brett, meta[0], 1)).grid(column=2, row=0)
                     self.canvas.bind("<Button-1>", safe_decision_locate0)
 
